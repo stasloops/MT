@@ -1,17 +1,19 @@
 "use client";
 
 import { LoginButton } from "@telegram-auth/react";
+import axios from "axios";
 import React from "react";
 
 export default function Home() {
+  const auth = async (data: any) => {
+    const res = await axios.post("/api/auth", data);
+    console.log(res.data);
+  };
   return (
     <div className="App">
       <LoginButton
         botUsername={process.env.BOT_USERNAME || "magic_tasks_auth_bot"}
-        onAuthCallback={(data) => {
-          console.log(data);
-          // call your backend here to validate the data and sign in the user
-        }}
+        onAuthCallback={auth}
         buttonSize="large" // "large" | "medium" | "small"
         cornerRadius={5} // 0 - 20
         showAvatar={true} // true | false

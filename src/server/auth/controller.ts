@@ -13,8 +13,7 @@ export const POST = async (req: Request, res: Response) => {
   try {
     const user = await validator.validate(data);
 
-    // The data is now valid and you can sign in the user.
-
+    NextResponse.json({ user });
     console.log(user);
   } catch (error) {
     console.error(error);
