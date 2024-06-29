@@ -7,6 +7,7 @@ export const POST = async (req: Request, res: Response) => {
   const validator = new AuthDataValidator({
     botToken: process.env.BOT_TOKEN,
   });
+  console.log(req.url);
 
   const data = urlStrToAuthDataMap(req.url);
 
@@ -17,6 +18,7 @@ export const POST = async (req: Request, res: Response) => {
     console.log(user);
   } catch (error) {
     console.error(error);
+    NextResponse.json({ error }, {status: 502});
   }
 };
 
