@@ -1,1 +1,1 @@
-export { GET, POST } from "./controller";
+export { POST } from "./controller";
