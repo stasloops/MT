@@ -14,8 +14,7 @@ export const POST = async (req: Request, res: Response) => {
 
     // const user = await validator.validate(data);
 
-    NextResponse.json({ user: 'dsdsd' });
-    // console.log(user);
+    NextResponse.json({ mess: "ads" }, { status: 200 });
   } catch (error) {
     console.error(error);
     NextResponse.json({ error }, { status: 502 });
