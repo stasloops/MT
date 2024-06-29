@@ -4,20 +4,7 @@ import { AuthDataValidator } from "@telegram-auth/server";
 import { urlStrToAuthDataMap } from "@telegram-auth/server/utils";
 
 export const POST = async (req: Request, res: Response) => {
-  try {
-    const validator = new AuthDataValidator({
-      botToken: process.env.BOT_TOKEN,
-    });
-    console.log(req.url, req);
-
-    const data = urlStrToAuthDataMap(req.url);
-
-    const user = await validator.validate(data);
-
-    NextResponse.json({ user: user }, { status: 200 });
-  } catch (error) {
-    NextResponse.json({ error }, { status: 502 });
-  }
+  NextResponse.json({ user: 'finally' }, { status: 200 });
 };
 
 export const GET = async (req: Request, res: Response) => {
