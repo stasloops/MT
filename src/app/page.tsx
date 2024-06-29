@@ -6,7 +6,7 @@ import React, { useEffect } from "react";
 
 export default function Home() {
   const auth = async (data: any) => {
-    const res = await axios.post("/api/auth", data);
+    const res = await axios.post("/api/auth", { data: data });
     console.log(res.data);
   };
 
