@@ -8,13 +8,13 @@ export const POST = async (req: Request, res: Response) => {
     const validator = new AuthDataValidator({
       botToken: process.env.BOT_TOKEN,
     });
-    console.log(validator);
+    console.log("validator: ", validator);
 
     const data = urlStrToAuthDataMap(req.url);
-    console.log(data);
+    console.log("data: ", data, "req.url: ", req.url);
 
     const user = await validator.validate(data);
-    console.log(user);
+    console.log("user: ", user);
 
     return NextResponse.json({ user }, { status: 200 });
   } catch (error) {
