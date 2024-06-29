@@ -7,8 +7,7 @@ export default function Home() {
   return (
     <div className="App">
       <LoginButton
-      
-        botUsername={"magic_tasks_auth_bot"}
+        botUsername={process.env.BOT_USERNAME || "magic_tasks_auth_bot"}
         onAuthCallback={(data) => {
           console.log(data);
           // call your backend here to validate the data and sign in the user
