@@ -1,0 +1,76 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+// npx prisma migrate dev --name init
+// npx prisma generate
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+model User {
+  id          Int      @id @default(autoincrement())
+  name        String   @default("")
+  avatar      String?
+  description String   @default("")
+  balance     Int      @default(0)
+  streak      Int      @default(0)
+  tasks       Int[]
+  skills      Int[]
+  debuffs     Int[]
+  createdAt   DateTime @default(now())
+}
+
+model Task {
+  id           Int       @id @default(autoincrement())
+  title        String    @default("")
+  description  String    @default("")
+  createdAt    DateTime  @default(now())
+  time         DateTime?
+  notification DateTime?
+}
+
+model Skill {
+  id           Int       @id @default(autoincrement())
+  title        String
+  description  String
+  streak       Int       @default(0)
+  createdAt    DateTime  @default(now())
+  endDate      DateTime?
+  activePeriod DateTime?
+  replay       Replay?
+}
+
+model Debuff {
+  id           Int       @id @default(autoincrement())
+  title        String
+  description  String
+  streak       Int       @default(0)
+  createdAt    DateTime  @default(now())
+  endDate      DateTime?
+  activePeriod DateTime?
+  replay       Replay?
+}
+
+enum Replay {
+  ALL
+  WEEKDAYS
+  WEEKENDS
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+  SATURDAY
+  SUNDAY
+  EVERY_2_DAYS
+  EVERY_WEEK
+  EVERY_MONTH
+  EVERY_YEAR
+}
