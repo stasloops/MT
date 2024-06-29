@@ -5,19 +5,18 @@ import { urlStrToAuthDataMap } from "@telegram-auth/server/utils";
 
 export const POST = async (req: Request, res: Response) => {
   try {
-    // const validator = new AuthDataValidator({
-    //   botToken: process.env.BOT_TOKEN,
-    // });
-    // console.log(req.url);
+    const validator = new AuthDataValidator({
+      botToken: process.env.BOT_TOKEN,
+    });
+    console.log(req.url);
 
-    // const data = urlStrToAuthDataMap(req.url);
+    const data = urlStrToAuthDataMap(req.url);
 
-    // const user = await validator.validate(data);
+    const user = await validator.validate(data);
 
-    NextResponse.json({ mess: "ads" }, { status: 200 });
+    NextResponse.json({ user }, { status: 200 });
   } catch (error) {
-    console.error(error);
-    NextResponse.json({ error }, { status: 502 });
+    NextResponse.json({ error }, { status: 500 });
   }
 };
 
