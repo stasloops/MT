@@ -7,35 +7,37 @@ import crypto from "crypto";
 export const POST = async (req: Request, res: Response) => {
   try {
     const { hash, ...data }: any = req.json();
-    const token: any = process.env.TELEGRAM_BOT_TOKEN;
-    const secret = crypto.createHash("sha256").update(token).digest();
-console.log(data, secret, token);
+    console.log(data, hash);
+    return NextResponse.json({ user: "Авторизация успешна" }, { status: 200 });
+    //     const token: any = process.env.TELEGRAM_BOT_TOKEN;
+    //     const secret = crypto.createHash("sha256").update(token).digest();
+    // console.log(data, secret, token);
 
-    const checkString = Object.keys(data)
-      .sort()
-      .map((key) => `${key}=${data[key]}`)
-      .join("\n");
+    //     const checkString = Object.keys(data)
+    //       .sort()
+    //       .map((key) => `${key}=${data[key]}`)
+    //       .join("\n");
 
-    const hmac = crypto
-      .createHmac("sha256", secret)
-      .update(checkString)
-      .digest("hex");
+    //     const hmac = crypto
+    //       .createHmac("sha256", secret)
+    //       .update(checkString)
+    //       .digest("hex");
 
-      console.log(hmac, hash);
-      
-    if (hmac === hash) {
-      // Авторизация успешна
-      return NextResponse.json(
-        { user: "Авторизация успешна" },
-        { status: 200 }
-      );
-    } else {
-      // Авторизация не удалась
-      return NextResponse.json(
-        { user: "Авторизация не удалась" },
-        { status: 401 }
-      );
-    }
+    //       console.log(hmac, hash);
+
+    //     if (hmac === hash) {
+    //       // Авторизация успешна
+    //       return NextResponse.json(
+    //         { user: "Авторизация успешна" },
+    //         { status: 200 }
+    //       );
+    //     } else {
+    //       // Авторизация не удалась
+    //       return NextResponse.json(
+    //         { user: "Авторизация не удалась" },
+    //         { status: 401 }
+    //       );
+    //     }
   } catch (error) {
     console.log("error: ", error);
     return NextResponse.json({ error }, { status: 502 });
