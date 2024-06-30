@@ -2,21 +2,40 @@ import jwt from "jsonwebtoken";
 import { NextResponse } from "next/server";
 import { AuthDataValidator } from "@telegram-auth/server";
 import { urlStrToAuthDataMap } from "@telegram-auth/server/utils";
+import crypto from "crypto";
 
 export const POST = async (req: Request, res: Response) => {
   try {
-    const validator = new AuthDataValidator({
-      botToken: process.env.BOT_TOKEN,
-    });
-    console.log("validator: ", validator);
+    const { hash, ...data }: any = req.json();
+    const token: any = process.env.TELEGRAM_BOT_TOKEN;
+    const secret = crypto.createHash("sha256").update(token).digest();
+console.log(data, secret, token);
 
-    const data = urlStrToAuthDataMap(req.url);
-    console.log("data: ", data, "req.url: ", req.url);
+    const checkString = Object.keys(data)
+      .sort()
+      .map((key) => `${key}=${data[key]}`)
+      .join("\n");
 
-    const user = await validator.validate(data);
-    console.log("user: ", user);
+    const hmac = crypto
+      .createHmac("sha256", secret)
+      .update(checkString)
+      .digest("hex");
 
-    return NextResponse.json({ user }, { status: 200 });
+      console.log(hmac, hash);
+      
+    if (hmac === hash) {
+      // Авторизация успешна
+      return NextResponse.json(
+        { user: "Авторизация успешна" },
+        { status: 200 }
+      );
+    } else {
+      // Авторизация не удалась
+      return NextResponse.json(
+        { user: "Авторизация не удалась" },
+        { status: 401 }
+      );
+    }
   } catch (error) {
     console.log("error: ", error);
     return NextResponse.json({ error }, { status: 502 });
