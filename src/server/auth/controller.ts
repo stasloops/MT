@@ -4,28 +4,31 @@ import { AuthDataValidator } from "@telegram-auth/server";
 import { urlStrToAuthDataMap } from "@telegram-auth/server/utils";
 import crypto from "crypto";
 
+function verifyTelegramAuth(data: any, token: any) {
+  const { hash, ...rest } = data;
+  const secret = crypto.createHash("sha256").update(token).digest();
+
+  const checkString = Object.keys(rest)
+    .sort()
+    .map((key) => `${key}=${rest[key]}`)
+    .join("\n");
+
+  const hmac = crypto
+    .createHmac("sha256", secret)
+    .update(checkString)
+    .digest("hex");
+
+  return hmac === hash;
+}
+
 export const POST = async (req: Request, res: Response) => {
   try {
-    const { hash, ...data }: any = await req.json();
-    console.log(data, hash);
+    const data = await req.json();
+    console.log(data);
 
-    const token: any = process.env.TELEGRAM_BOT_TOKEN;
-    const secret = crypto.createHash("sha256").update(token).digest();
-    console.log(secret, token);
+    const isValid = verifyTelegramAuth(data, process.env.BOT_TOKEN);
 
-    const checkString = Object.keys(data)
-      .sort()
-      .map((key) => `${key}=${data[key]}`)
-      .join("\n");
-
-    const hmac = crypto
-      .createHmac("sha256", secret)
-      .update(checkString)
-      .digest("hex");
-
-    console.log(hmac, hash);
-
-    if (hmac === hash) {
+    if (isValid) {
       // Авторизация успешна
       return NextResponse.json(
         { user: "Авторизация успешна" },

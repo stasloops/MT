@@ -3,12 +3,14 @@
 import { LoginButton } from "@telegram-auth/react";
 import axios from "axios";
 import React, { useEffect } from "react";
+import crypto from "crypto";
 
 export default function Home() {
   const auth = async (data: any) => {
     const res = await axios.post("/api/auth", data);
     console.log(res.data);
   };
+
 
   useEffect(() => {
     const getUser = async () => {
