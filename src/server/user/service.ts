@@ -1,7 +1,7 @@
 import { prisma } from "../lib/prisma";
 import { IUser } from "./types";
 
-const get = async ({ id, telegramID }: Partial<IUser>) => {
+const get = async ({ telegramID }: Partial<IUser>) => {
   const user = await prisma.user.findUnique({
     where: { telegramID },
   });
