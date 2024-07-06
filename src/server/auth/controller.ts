@@ -14,7 +14,7 @@ export const POST = async (req: Request, res: Response) => {
     );
 
     if (isValid) {
-      const user = userService.get({ telegramID: id });
+      const user = userService.get(id);
       if (!user) {
         userService.create({ telegramID: id, name, avatar });
       }

@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-
 import { userService } from "./service";
 
 export const GET = async (req: Request, res: Response) => {
@@ -16,7 +15,7 @@ export const POST = async (req: Request, res: Response) => {
   //   },
   // });
 
-  // return NextResponse.json({ ...newUser }, { status: 201 });
+  return NextResponse.json({ message: "" }, { status: 201 });
 };
 
 export const PUT = async (req: Request, res: Response) => {};
