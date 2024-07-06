@@ -11,14 +11,14 @@ export default function Home() {
     console.log(res.data);
   };
 
-
   useEffect(() => {
-    const getUser = async () => {
-      const res = await axios.post("/api/user", { data: { name: "Neichh" } });
+    const getUsers = async () => {
+      const res = await axios.get("/api/user");
       console.log(res.data);
     };
-
-    getUser();
+    setTimeout(() => {
+      getUsers();
+    }, 7000);
   }, []);
 
   return (

@@ -1,7 +1,8 @@
 export interface IUser {
   id: number;
+  telegramID: number;
   name: string;
-  avatar: string;
+  avatar: string | null;
   description: string;
   balance: number;
   streak: number;

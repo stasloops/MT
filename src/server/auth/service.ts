@@ -2,7 +2,7 @@ import { IUser } from "../user/types";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
 
-const signToken = (userData: IUser) => {
+const signToken = (userData: Partial<IUser>) => {
   const token = jwt.sign(
     {
       data: userData,
@@ -15,7 +15,7 @@ const signToken = (userData: IUser) => {
 
 const verifyToken = (token: string) => {
   const is = jwt.verify(token, process.env.SHA || "");
-  return is
+  return is;
 };
 
 const verifyTelegramAuth = (data: any, token: any) => {

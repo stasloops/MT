@@ -1,16 +1,31 @@
 import { NextResponse } from "next/server";
 import { authService } from "./service";
+import { userService } from "../user/service";
+import { cookies } from "next/headers";
 
 export const POST = async (req: Request, res: Response) => {
   try {
-    const data = await req.json();
-    console.log(data);
+    const telegramUserData = await req.json();
+    const { id, name, avatar } = telegramUserData;
 
-    const isValid = authService.verifyTelegramAuth(data, process.env.BOT_TOKEN);
+    const isValid = authService.verifyTelegramAuth(
+      telegramUserData,
+      process.env.BOT_TOKEN
+    );
 
     if (isValid) {
-      const token = authService.signToken(data.id);
-      return NextResponse.json({ token: token }, { status: 200 });
+      const user = userService.get({ telegramID: id });
+      if (!user) {
+        userService.create({ telegramID: id, name, avatar });
+      }
+
+      const token = authService.signToken({ telegramID: id, name, avatar });
+      cookies().set({
+        name: "token",
+        value: token,
+        httpOnly: true,
+      });
+      return NextResponse.json({message: 'Авторизация прошла успешна!'}, { status: 200 });
     } else {
       return NextResponse.json(
         { message: "Авторизация не удалась" },

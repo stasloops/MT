@@ -16,7 +16,8 @@ datasource db {
 }
 
 model User {
-  id          Int      @id @default(autoincrement())
+  id          Int      @unique @id @default(autoincrement())
+  telegramID  Int      @unique 
   name        String   @default("")
   avatar      String?
   description String   @default("")

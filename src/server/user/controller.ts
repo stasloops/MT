@@ -1,23 +1,22 @@
 import { NextResponse } from "next/server";
-import { prisma } from "../lib/prisma";
+
+import { userService } from "./service";
 
 export const GET = async (req: Request, res: Response) => {
-  return NextResponse.json({ message: "Еврика блядь!!!" }, { status: 210 });
+  const users = await userService.getAll();
+  return NextResponse.json({ users }, { status: 200 });
 };
 
 export const POST = async (req: Request, res: Response) => {
-  const { name }: any = await req.json();
+  // const { name }: any = await req.json();
 
-  const newUser = await prisma.user.create({
-    data: {
-      name,
-    },
-  });
+  // const newUser = await prisma.user.create({
+  //   data: {
+  //     name,
+  //   },
+  // });
 
-  return NextResponse.json({ ...newUser }, { status: 201 });
+  // return NextResponse.json({ ...newUser }, { status: 201 });
 };
 
-
-export const PUT  = async  (req: Request, res: Response)  =>  {
-    
-}
+export const PUT = async (req: Request, res: Response) => {};

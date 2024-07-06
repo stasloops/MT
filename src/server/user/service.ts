@@ -1,23 +1,41 @@
 import { prisma } from "../lib/prisma";
 import { IUser } from "./types";
 
+const get = async ({ id, telegramID }: Partial<IUser>) => {
+  const user = await prisma.user.findUnique({
+    where: { id, telegramID },
+  });
+
+  return user;
+};
+
+const getAll = async () => {
+  const users = await prisma.user.findMany();
+  return users;
+};
+
+const create = async ({ name, avatar, telegramID }: Partial<IUser>) => {
+  if (!telegramID) {
+    return null;
+  }
+
+  const newUser: IUser = await prisma.user.create({
+    data: {
+      name,
+      avatar,
+      telegramID,
+    },
+  });
+
+  return newUser;
+};
+
 const update = async (userData: IUser) => {
   const { id, ...data } = userData;
 
   const newUser = await prisma.user.update({
     where: { id: id },
     data: data,
-  });
-
-  return newUser;
-};
-
-const create = async ({ name, avatar }: Partial<IUser>) => {
-  const newUser = await prisma.user.create({
-    data: {
-      name,
-      avatar,
-    },
   });
 
   return newUser;
@@ -36,6 +54,8 @@ const remove = async (userId: number) => {
 };
 
 export const userService = {
+  get,
+  getAll,
   update,
   create,
   delete: remove,
