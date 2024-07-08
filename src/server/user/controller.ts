@@ -28,6 +28,23 @@ export const GET = async (req: Request, res: Response) => {
   }
 };
 
+export const DELETE = async (req: Request, res: Response) => {
+  try {
+    const { id } = await req.json();
+    userService.delete(id);
+
+    return NextResponse.json(
+      { message: "Удаление прошло успешно!" },
+      { status: 200 }
+    );
+  } catch (err) {
+    return NextResponse.json(
+      { message: "Что-то пошло не так :)" },
+      { status: 500 }
+    );
+  }
+};
+
 export const POST = async (req: Request, res: Response) => {
   // const { name }: any = await req.json();
 

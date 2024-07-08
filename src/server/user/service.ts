@@ -48,7 +48,7 @@ const remove = async (userId: number) => {
   try {
     await prisma.user.delete({
       where: {
-        id: userId,
+        telegramID: userId,
       },
     });
   } catch (err) {
