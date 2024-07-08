@@ -14,9 +14,9 @@ export const POST = async (req: Request, res: Response) => {
     );
 
     if (isValid) {
-      const user = userService.get(id);
+      let user = userService.get(id);
       if (!user) {
-        userService.create({ telegramID: id, name, avatar });
+        user = userService.create({ telegramID: id, name, avatar });
       }
 
       const token = authService.signToken({ telegramID: id, name, avatar });
@@ -25,7 +25,10 @@ export const POST = async (req: Request, res: Response) => {
         value: token,
         httpOnly: true,
       });
-      return NextResponse.json({message: 'Авторизация прошла успешна!'}, { status: 200 });
+      return NextResponse.json(
+        { message: "Авторизация прошла успешна!", user: user },
+        { status: 200 }
+      );
     } else {
       return NextResponse.json(
         { message: "Авторизация не удалась" },
