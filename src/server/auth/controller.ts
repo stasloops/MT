@@ -14,12 +14,16 @@ export const POST = async (req: Request, res: Response) => {
     );
 
     if (isValid) {
-      let user = userService.get(id);
+      let user = await userService.get(id);
       if (!user) {
-        user = userService.create({ telegramID: id, name, avatar });
+        user = await userService.create({ telegramID: id, name, avatar });
       }
 
-      const token = authService.signToken({ telegramID: id, name, avatar });
+      const token = authService.signToken({
+        telegramID: id,
+        name,
+        avatar,
+      });
       cookies().set({
         name: "Authorization",
         value: token,
