@@ -12,12 +12,11 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("POSTGRES_PRISMA_URL")
-  directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 model User {
-  id          Int      @unique @id @default(autoincrement())
-  telegramID  Int      @unique 
+  id          Int      @id @unique @default(autoincrement())
+  telegramID  Int      @unique
   name        String   @default("")
   avatar      String?
   description String   @default("")
@@ -48,7 +47,6 @@ model Skill {
   activePeriod DateTime?
   replay       Replay?
 }
-
 
 enum Replay {
   ALL
