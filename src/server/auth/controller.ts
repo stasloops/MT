@@ -21,7 +21,7 @@ export const POST = async (req: Request, res: Response) => {
 
       const token = authService.signToken({ telegramID: id, name, avatar });
       cookies().set({
-        name: "token",
+        name: "Authorization",
         value: token,
         httpOnly: true,
       });

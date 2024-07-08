@@ -1,5 +1,5 @@
 import { IUser } from "../user/types";
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
 import crypto from "crypto";
 
 const signToken = (userData: Partial<IUser>) => {
@@ -8,14 +8,24 @@ const signToken = (userData: Partial<IUser>) => {
       data: userData,
     },
     process.env.SHA || "",
-    { expiresIn: 60 * 60 }
+    { expiresIn: 60 * 60 * 60 }
   );
   return token;
 };
 
-const verifyToken = (token: string) => {
-  const is = jwt.verify(token, process.env.SHA || "");
-  return is;
+export type VerifyToken =
+  | {
+      data: { telegramID: number };
+    }
+  | any;
+
+const verifyToken = (token: string): VerifyToken => {
+  try {
+    const is: VerifyToken = jwt.verify(token, process.env.SHA || "");
+    return is;
+  } catch (err) {
+    console.log("ERR: ", err);
+  }
 };
 
 const verifyTelegramAuth = (data: any, token: any) => {

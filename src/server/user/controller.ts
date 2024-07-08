@@ -1,9 +1,31 @@
 import { NextResponse } from "next/server";
 import { userService } from "./service";
+import { cookies } from "next/headers";
+import { authService, VerifyToken } from "../auth/service";
 
 export const GET = async (req: Request, res: Response) => {
-  const users = await userService.getAll();
-  return NextResponse.json({ users }, { status: 200 });
+  try {
+    let token = cookies().get("Authorization")?.value;
+
+    const validData: VerifyToken = authService.verifyToken(String(token));
+
+    if (!validData) {
+      return NextResponse.json(
+        { message: "Не валидный токен!" },
+        { status: 401 }
+      );
+    }
+
+    const telegramID = validData?.data?.telegramID;
+    const user = await userService.get(telegramID);
+
+    return NextResponse.json({ user: user }, { status: 200 });
+  } catch (err) {
+    return NextResponse.json(
+      { message: "Не валидный токен!" },
+      { status: 401 }
+    );
+  }
 };
 
 export const POST = async (req: Request, res: Response) => {

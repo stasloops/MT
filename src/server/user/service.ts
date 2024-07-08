@@ -9,8 +9,12 @@ const get = async (telegramID: number) => {
 };
 
 const getAll = async () => {
-  const users = await prisma.user.findMany();
-  return users;
+  try {
+    const users = await prisma.user.findMany();
+    return users;
+  } catch (err) {
+    console.log("getAll ERROR: ", err);
+  }
 };
 
 const create = async ({ name, avatar, telegramID }: Partial<IUser>) => {

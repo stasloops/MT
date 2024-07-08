@@ -18,7 +18,7 @@ export default function Home() {
     };
     setTimeout(() => {
       getUsers();
-    }, 7000);
+    });
   }, []);
 
   return (
