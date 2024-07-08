@@ -6,7 +6,7 @@ import { cookies } from "next/headers";
 export const POST = async (req: Request, res: Response) => {
   try {
     const telegramUserData = await req.json();
-    const { id, name, avatar } = telegramUserData;
+    const { id, name, photo_url } = telegramUserData;
 
     const isValid = authService.verifyTelegramAuth(
       telegramUserData,
@@ -16,13 +16,17 @@ export const POST = async (req: Request, res: Response) => {
     if (isValid) {
       let user = await userService.get(id);
       if (!user) {
-        user = await userService.create({ telegramID: id, name, avatar });
+        user = await userService.create({
+          telegramID: id,
+          name,
+          avatar: photo_url,
+        });
       }
 
       const token = authService.signToken({
         telegramID: id,
         name,
-        avatar,
+        avatar: photo_url,
       });
       cookies().set({
         name: "Authorization",

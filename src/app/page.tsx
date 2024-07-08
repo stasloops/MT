@@ -1,28 +1,34 @@
 "use client";
 
+import { userModel } from "@/shared/model/user";
 import { LoginButton } from "@telegram-auth/react";
 import axios from "axios";
+import { useUnit } from "effector-react";
+import Image from "next/image";
 import React, { useEffect } from "react";
-import crypto from "crypto";
 
 export default function Home() {
+  const [user, fetchUser] = useUnit([userModel.$user, userModel.fetchUserFx]);
+
   const auth = async (data: any) => {
-    const res = await axios.post("/api/auth", data);
-    console.log(res.data);
+    await axios.post("/api/auth", data);
+    await fetchUser();
   };
 
   useEffect(() => {
-    const getUsers = async () => {
-      const res = await axios.get("/api/user");
-      console.log(res.data);
-    };
-    setTimeout(() => {
-      getUsers();
-    });
+    fetchUser();
   }, []);
 
   return (
-    <div className="App">
+    <div className="h-[100dvh] flex flex-col justify-center items-center gap-3">
+      <Image
+        src={user?.avatar || ""}
+        width={30}
+        height={30}
+        className=" rounded-full bg-slate-500"
+        alt="logo"
+      />
+      <div>{user?.name || "Name"}</div>
       <LoginButton
         botUsername={process.env.BOT_USERNAME || "magic_tasks_auth_bot"}
         onAuthCallback={auth}
