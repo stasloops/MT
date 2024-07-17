@@ -10,6 +10,14 @@ const withSerwist = withSerwistInit({
 });
 
 export default withSerwist({
+    images: {
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: 't.me',
+            },
+        ],
+    },
 
 });
 

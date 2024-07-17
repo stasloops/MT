@@ -2,11 +2,18 @@ import { NextResponse } from "next/server";
 import { authService } from "./service";
 import { userService } from "../user/service";
 import { cookies } from "next/headers";
+import { IUser } from "../user/types";
 
 export const POST = async (req: Request, res: Response) => {
   try {
     const telegramUserData = await req.json();
-    const { id, first_name, photo_url } = telegramUserData;
+    const { id, first_name, username, photo_url } = telegramUserData;
+    const user_data: Partial<IUser> = {
+      telegram_id: id,
+      name: first_name,
+      telegram_username: username,
+      avatar: photo_url,
+    };
 
     const isValid = authService.verifyTelegramAuth(
       telegramUserData,
@@ -14,19 +21,15 @@ export const POST = async (req: Request, res: Response) => {
     );
 
     if (isValid) {
-      let user = await userService.get(id);
+      let user: IUser | null = await userService.get(id);
       if (!user) {
-        user = await userService.create({
-          telegramID: id,
-          name: first_name,
-          avatar: photo_url,
-        });
+        user = await userService.create(user_data);
+      } else {
+        user = await userService.update(user_data);
       }
 
       const token = authService.signToken({
-        telegramID: id,
-        name: first_name,
-        avatar: photo_url,
+        telegram_id: id,
       });
       cookies().set({
         name: "Authorization",

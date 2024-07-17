@@ -16,17 +16,20 @@ datasource db {
 }
 
 model User {
-  id          Int      @id @unique @default(autoincrement())
-  telegramID  Int      @unique
-  name        String   @default("")
-  avatar      String?
-  description String   @default("")
-  balance     Int      @default(0)
-  streak      Int      @default(0)
-  tasks       Int[]
-  skills      Int[]
-  debuffs     Int[]
-  createdAt   DateTime @default(now())
+  id                Int      @id @unique @default(autoincrement())
+  telegram_id        Int      @unique
+  telegram_username String   @unique
+  name              String   @default("")
+  avatar            String?
+  description       String   @default("")
+  balance           Int      @default(0)
+  streak            Int      @default(0)
+  tasks             Int[]
+  skills            Int[]
+  skills_limit      Int      @default(5)
+  debuffs           Int[]
+  debuffs_limit     Int      @default(5)
+  createdAt         DateTime @default(now())
 }
 
 model Task {

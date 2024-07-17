@@ -1,7 +1,8 @@
 export interface IUser {
   id: number;
-  telegramID: number;
+  telegram_id: number;
   name: string;
+  telegram_username: string
   avatar: string | null;
   description: string;
   balance: number;

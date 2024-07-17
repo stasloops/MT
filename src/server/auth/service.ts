@@ -15,7 +15,7 @@ const signToken = (userData: Partial<IUser>) => {
 
 export type VerifyToken =
   | {
-      data: { telegramID: number };
+      data: { telegram_id: number };
     }
   | any;
 

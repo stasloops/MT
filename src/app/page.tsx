@@ -21,13 +21,17 @@ export default function Home() {
 
   return (
     <div className="h-[100dvh] flex flex-col justify-center items-center gap-3">
-      <Image
-        src={user?.avatar || ""}
-        width={30}
-        height={30}
-        className=" rounded-full bg-slate-500"
-        alt="logo"
-      />
+      {user?.avatar ? (
+        <Image
+          src={user?.avatar}
+          width={30}
+          height={30}
+          priority={true}
+          className=" rounded-full bg-slate-500"
+          alt="logo"
+        />
+      ) : null}
+
       <div>{user?.name || "Name"}</div>
       <LoginButton
         botUsername={process.env.BOT_USERNAME || "magic_tasks_auth_bot"}
