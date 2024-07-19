@@ -23,6 +23,7 @@ export const BottomMenu: FC<Props> = ({ items }) => {
           <div
             onClick={() => handleClick(item.label)}
             className={clsx(styles.item, isActive && styles.item_active)}
+            key={item.label}
           >
             <Icon
               className={clsx(styles.icon, isActive && styles.icon_active)}
