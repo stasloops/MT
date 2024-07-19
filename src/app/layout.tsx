@@ -2,8 +2,13 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { APP_DESCRIPTION, APP_NAME } from "./manifest";
+import { Header } from "@/shared/ui/design_system";
+import localFont from "next/font/local";
 
-const inter = Inter({ subsets: ["latin"] });
+const supercell = localFont({
+  src: "../shared/ui/fonts/KZSupercell-Magic.ttf",
+  variable: "--supercell",
+});
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
@@ -33,7 +38,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={supercell.className}>
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }

@@ -18,7 +18,6 @@ export const GET = async (req: Request, res: Response) => {
 
     const telegram_id = validData?.data?.telegram_id;
     const user = await userService.get(telegram_id);
-console.log(telegram_id, user);
 
     return NextResponse.json({ user: user }, { status: 200 });
   } catch (err) {

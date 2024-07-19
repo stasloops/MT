@@ -21,7 +21,7 @@ export type VerifyToken =
 
 const verifyToken = (token: string): VerifyToken => {
   try {
-    const is: VerifyToken = jwt.verify(token, process.env.SHA || "");
+    const is: VerifyToken = jwt.verify(token, process.env.SHA || "123");
     return is;
   } catch (err) {
     console.log("ERR: ", err);

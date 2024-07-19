@@ -1,0 +1,9 @@
+.wrapper {
+  display: flex;
+  padding: 16px;
+}
+
+.news_icon {
+  width: 64px;
+  height: 32px;
+}

@@ -1,11 +1,13 @@
 "use client";
 
 import { userModel } from "@/shared/model/user";
+import { BottomMenu } from "@/shared/ui/design_system";
 import { LoginButton } from "@telegram-auth/react";
 import axios from "axios";
 import { useUnit } from "effector-react";
 import Image from "next/image";
 import React, { useEffect } from "react";
+import { BookIcon, ChestIcon, MirrorIcon, WheelIcon } from "@/shared/ui/icons";
 
 export default function Home() {
   const [user, fetchUser] = useUnit([userModel.$user, userModel.fetchUserFx]);
@@ -20,7 +22,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="h-[100dvh] flex flex-col justify-center items-center gap-3">
+    <div className="">
       {user?.avatar ? (
         <Image
           src={user?.avatar}
@@ -40,6 +42,16 @@ export default function Home() {
         cornerRadius={5} // 0 - 20
         showAvatar={true} // true | false
         lang="en"
+      />
+
+      <BottomMenu
+        items={[
+          { label: "Профиль", icon: MirrorIcon, width: 36, height: 51 },
+          { label: "Предметы", icon: ChestIcon, width: 47, height: 46 },
+          { label: "Задания", icon: BookIcon, width: 44, height: 55 },
+          { label: "Настройки", icon: WheelIcon, width: 44, height: 45 },
+          { label: "Что", icon: MirrorIcon, width: 36, height: 51 },
+        ]}
       />
     </div>
   );

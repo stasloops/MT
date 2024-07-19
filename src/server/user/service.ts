@@ -2,12 +2,16 @@ import { prisma } from "../lib/prisma";
 import { IUser } from "./types";
 
 const get = async (telegram_id: number) => {
-  const user = await prisma.user.findUnique({
-    where: { telegram_id },
-  });
-  console.log(user);
-  
-  return user;
+  try {
+    const user = await prisma.user.findUnique({
+      where: { telegram_id },
+    });
+
+    return user;
+  } catch (err) {
+    console.log(err);
+    return null;
+  }
 };
 
 const getAll = async () => {
