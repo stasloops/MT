@@ -8,6 +8,7 @@ import { useUnit } from "effector-react";
 import Image from "next/image";
 import React, { useEffect } from "react";
 import { BookIcon, ChestIcon, MirrorIcon, WheelIcon } from "@/shared/ui/icons";
+import styles from "./page.module.scss";
 
 export default function Home() {
   const [user, fetchUser] = useUnit([userModel.$user, userModel.fetchUserFx]);
@@ -22,7 +23,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="">
+    <div className={styles.wrapper}>
       {user?.avatar ? (
         <Image
           src={user?.avatar}

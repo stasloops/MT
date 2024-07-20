@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   applicationName: APP_NAME,
   title: APP_NAME,
   description: APP_DESCRIPTION,
+  viewport: "width=device-width, initial-scale=1.0",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
@@ -37,10 +38,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ru">
       <body className={supercell.className}>
-        <Header />
-        {children}
+        <div className="container">
+          <div className="background"></div>
+          <div className="layout">
+            <Header />
+            {children}
+          </div>
+        </div>
       </body>
     </html>
   );
