@@ -3,7 +3,24 @@
 @tailwind utilities;
 
 :root {
+  --color: #fff;
+
   --background: #1f1b24;
+
+  --border_selected: #9472D0;
+
+  --border: #7D7288;
+
+  --gradient_default: linear-gradient(
+    180deg,
+    rgba(103, 86, 121, 1) 0%,
+    rgba(77, 66, 90, 1) 100%
+  );
+  --gradient_selected: linear-gradient(
+    180deg,
+    rgba(119, 75, 195, 1) 0%,
+    rgba(172, 125, 255, 1) 100%
+  );
 }
 
 body {
