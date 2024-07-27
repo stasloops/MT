@@ -39,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body className={supercell.className}>
-        <div className="layout">{children}</div>
+        <div className="layout"></div>
       </body>
     </html>
   );
