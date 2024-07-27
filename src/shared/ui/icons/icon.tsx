@@ -18,6 +18,8 @@ export const Icon: FC<IconProps> = ({
   src,
   alt = "",
 }) => {
+  console.log(1);
+  
   return (
     <Image
       style={{ width, height }}
