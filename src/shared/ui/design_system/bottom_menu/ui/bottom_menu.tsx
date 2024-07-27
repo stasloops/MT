@@ -5,6 +5,7 @@ import styles from "./bottom_menu.module.scss";
 import clsx from "clsx";
 import { useUnit } from "effector-react";
 import { bottom_menu_model } from "../model";
+import { vibrateDevice } from "@/shared/lib/utils/vibrateDevice";
 
 interface Props {
   items: {
@@ -25,6 +26,7 @@ export const BottomMenu: FC<Props> = ({ items }) => {
 
   const handleClick = (activeTab: number) => {
     changeActiveTab(activeTab);
+    vibrateDevice(100)
   };
 
   useEffect(() => {

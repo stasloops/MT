@@ -31,7 +31,7 @@ export const Profile = () => {
               width={30}
               height={30}
               priority={true}
-              className=" rounded-full bg-slate-500"
+              className="rounded-full bg-slate-500"
               alt="logo"
             />
             <div>{user?.name}</div>

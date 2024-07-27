@@ -11,7 +11,7 @@
   width: 600vw;
   padding-top: 600vw;
   background-image: url("../shared/ui/images/background.png");
-  background-size: 10% 10%;
+  background-size: 9% 9%;
   animation: moveBackground 50s linear infinite;
 }
 
@@ -20,6 +20,6 @@
     transform: translate(0, 0);
   }
   100% {
-    transform: translate(-10%, -10%);
+    transform: translate(-9%, -9%);
   }
 }
