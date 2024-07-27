@@ -5,7 +5,7 @@
 :root {
   --color: #fff;
 
-  --background: #1B181F;
+  --background: #1b181f;
 
   --border_selected: #9472d0;
 
@@ -21,6 +21,10 @@
     rgba(119, 75, 195, 1) 0%,
     rgba(172, 125, 255, 1) 100%
   );
+
+  --z_0: 0;
+  --z_1: 3;
+  --z_2: 10;
 }
 
 body,
@@ -29,38 +33,4 @@ html {
   margin: 0;
   padding: 0;
   height: 100%;
-}
-
-.container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden; 
-}
-
-.background_container {
-  position: relative;
-  
-}
-.background {
-  position: absolute;
-  top: -100px;
-  width: 600vw;
-  padding-top: 600vw;
-  background-image: url("../shared/ui/images/background.png");
-  background-size: 10% 10%;
-  animation: moveBackground 50s linear infinite;
-}
-
-.layout {
-  z-index: 1;
-}
-
-@keyframes moveBackground {
-  0% {
-    transform: translate(0, 0);
-  }
-  100% {
-    transform: translate(-10%, -10%);
-  }
 }

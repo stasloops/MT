@@ -1,4 +1,25 @@
 .wrapper {
   position: relative;
-  z-index: 2;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.background {
+  z-index: var(--z_0);
+  position: absolute;
+  top: -100px;
+  width: 600vw;
+  padding-top: 600vw;
+  background-image: url("../shared/ui/images/background.png");
+  background-size: 10% 10%;
+  animation: moveBackground 50s linear infinite;
+}
+
+@keyframes moveBackground {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-10%, -10%);
+  }
 }

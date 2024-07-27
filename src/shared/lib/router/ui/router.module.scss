@@ -1,7 +1,3 @@
-.wrapper {
-  height: 100vh;
-}
-
 .pages {
   display: flex;
   transition: 0.3s;
@@ -9,9 +5,14 @@
   &_item {
     min-width: 100vw;
     max-width: 100vw;
-    z-index: 1;
+    z-index: var(--z_1);
 
     display: flex;
     justify-content: center;
   }
+}
+
+.children {
+  position: relative;
+  z-index: var(--z_1);
 }

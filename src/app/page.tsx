@@ -1,7 +1,7 @@
 "use client";
 
 import { userModel } from "@/shared/model/user";
-import { BottomMenu } from "@/shared/ui/design_system";
+import { BottomMenu, Header } from "@/shared/ui/design_system";
 import { LoginButton } from "@telegram-auth/react";
 import axios from "axios";
 import { useUnit } from "effector-react";
@@ -9,44 +9,25 @@ import Image from "next/image";
 import React, { useEffect } from "react";
 import { BookIcon, ChestIcon, MirrorIcon, WheelIcon } from "@/shared/ui/icons";
 import styles from "./page.module.scss";
-import { Router } from "@/shared/lib/router";
+import { Route, Router } from "@/shared/lib/router";
+import { Profile } from "@/pages/profile";
+import { Items } from "@/pages/items";
+import { Tasks } from "@/pages/tasks";
+import { Settings } from "@/pages/settings";
 
 export default function Home() {
-  const [user, fetchUser] = useUnit([userModel.$user, userModel.fetchUserFx]);
-
-  const auth = async (data: any) => {
-    await axios.post("/api/auth", data);
-    await fetchUser();
-  };
-
-  useEffect(() => {
-    fetchUser();
-  }, []);
-
   return (
     <div className={styles.wrapper}>
-      {/* {user?.avatar ? (
-        <Image
-          src={user?.avatar}
-          width={30}
-          height={30}
-          priority={true}
-          className=" rounded-full bg-slate-500"
-          alt="logo"
-        />
-      ) : null}
+      <Header />
 
-      <div>{user?.name || "Name"}</div>
-      <LoginButton
-        botUsername={process.env.BOT_USERNAME || "magic_tasks_auth_bot"}
-        onAuthCallback={auth}
-        buttonSize="large"
-        cornerRadius={5}
-        showAvatar={true}
-        lang="en"
-      /> */}
-      
-      <Router />
+      <Router>
+        <div className={styles.background}></div>
+        <Route component={Profile} />
+        <Route component={Items} />
+        <Route component={Tasks} />
+        <Route component={Settings} />
+        <Route component={Items} />
+      </Router>
 
       <BottomMenu
         items={[

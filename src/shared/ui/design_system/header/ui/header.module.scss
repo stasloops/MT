@@ -1,6 +1,6 @@
 .wrapper {
   position: relative;
-  z-index: 2;
+  z-index: var(--z_2);
   display: flex;
   justify-content: space-between;
   padding: 16px;

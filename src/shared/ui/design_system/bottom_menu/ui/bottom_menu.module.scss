@@ -4,6 +4,7 @@
   width: 100%;
   height: var(--menu-height);
 
+  z-index: var(--z_2);
   position: fixed;
   bottom: 0;
   left: 0;
@@ -26,7 +27,7 @@
   &_label {
     position: absolute;
     bottom: 20px;
-    z-index: 2;
+    z-index: var(--z_2);
   }
 
 
@@ -56,7 +57,7 @@
 
 .background {
   transition: 0.4s;
-  z-index: 1;
+  z-index: var(--z_1);
   position: absolute;
   top: 0;
   left: 0;
@@ -67,7 +68,7 @@
 }
 
 .icon {
-  z-index: 2;
+  z-index: var(--z_2);
 
   &_active {
     transition: 0.2s;
