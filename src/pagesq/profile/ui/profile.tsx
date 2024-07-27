@@ -4,7 +4,7 @@ import { LoginButton } from "@telegram-auth/react";
 import axios from "axios";
 import { useUnit } from "effector-react";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 
 export const Profile = () => {
   const [user, fetchUser] = useUnit([userModel.$user, userModel.fetchUserFx]);
@@ -14,9 +14,9 @@ export const Profile = () => {
     await fetchUser();
   };
 
-  // useEffect(() => {
-  //   fetchUser();
-  // }, []);
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
   return (
     <div>
