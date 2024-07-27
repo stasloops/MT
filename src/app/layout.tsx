@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
+
 import { APP_DESCRIPTION, APP_NAME } from "./manifest";
-import { Header } from "@/shared/ui/design_system";
 import localFont from "next/font/local";
+import "./globals.css";
 
 const supercell = localFont({
   src: "../shared/ui/fonts/KZSupercell-Magic.ttf",
@@ -40,13 +39,7 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body className={supercell.className}>
-        <div className="container">
-          <div className="background"></div>
-          <div className="layout">
-            <Header />
-            {children}
-          </div>
-        </div>
+        <div className="layout">{children}</div>
       </body>
     </html>
   );

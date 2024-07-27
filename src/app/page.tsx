@@ -9,6 +9,7 @@ import Image from "next/image";
 import React, { useEffect } from "react";
 import { BookIcon, ChestIcon, MirrorIcon, WheelIcon } from "@/shared/ui/icons";
 import styles from "./page.module.scss";
+import { Router } from "@/shared/lib/router";
 
 export default function Home() {
   const [user, fetchUser] = useUnit([userModel.$user, userModel.fetchUserFx]);
@@ -24,7 +25,7 @@ export default function Home() {
 
   return (
     <div className={styles.wrapper}>
-      {user?.avatar ? (
+      {/* {user?.avatar ? (
         <Image
           src={user?.avatar}
           width={30}
@@ -39,11 +40,13 @@ export default function Home() {
       <LoginButton
         botUsername={process.env.BOT_USERNAME || "magic_tasks_auth_bot"}
         onAuthCallback={auth}
-        buttonSize="large" // "large" | "medium" | "small"
-        cornerRadius={5} // 0 - 20
-        showAvatar={true} // true | false
+        buttonSize="large"
+        cornerRadius={5}
+        showAvatar={true}
         lang="en"
-      />
+      /> */}
+      
+      <Router />
 
       <BottomMenu
         items={[
