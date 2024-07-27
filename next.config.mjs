@@ -11,7 +11,6 @@ const withSerwist = withSerwistInit({
 });
 
 export default withSerwist({
-    swcMinify: false,
     images: {
         remotePatterns: [
             {

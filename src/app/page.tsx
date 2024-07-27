@@ -1,19 +1,14 @@
 "use client";
 
-import { userModel } from "@/shared/model/user";
 import { BottomMenu, Header } from "@/shared/ui/design_system";
-import { LoginButton } from "@telegram-auth/react";
-import axios from "axios";
-import { useUnit } from "effector-react";
-import Image from "next/image";
-import React, { useEffect } from "react";
+import React from "react";
 import { BookIcon, ChestIcon, MirrorIcon, WheelIcon } from "@/shared/ui/icons";
 import styles from "./page.module.scss";
 import { Route, Router } from "@/shared/lib/router";
-import { Profile } from "@/pages/profile";
-import { Items } from "@/pages/items";
-import { Tasks } from "@/pages/tasks";
-import { Settings } from "@/pages/settings";
+import { Profile } from "@/pagesq/profile";
+import { Items } from "@/pagesq/items";
+import { Tasks } from "@/pagesq/tasks";
+import { Settings } from "@/pagesq/settings";
 
 export default function Home() {
   return (
