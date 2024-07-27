@@ -49,6 +49,7 @@ export const BottomMenu: FC<Props> = ({ items }) => {
         return (
           <div
             onClick={() => handleClick(index)}
+            onPointerDown={() => vibrateDevice(500)}
             className={clsx(styles.item, isActive && styles.item_active)}
             key={item.label}
           >
