@@ -25,8 +25,8 @@ export const BottomMenu: FC<Props> = ({ items }) => {
     useState<number>(0);
 
   const handleClick = (activeTab: number) => {
-    // changeActiveTab(activeTab);
-    vibrateDevice(500)
+    vibrateDevice(500);
+    changeActiveTab(activeTab);
   };
 
   useEffect(() => {

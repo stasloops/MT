@@ -1,4 +1,8 @@
 export const vibrateDevice = (duration: number) => {
-  const canVibrate: any = window.navigator.vibrate;
-  if (canVibrate) window.navigator.vibrate(duration);
+  if ("vibrate" in navigator) {
+    navigator.vibrate(duration);
+  } else {
+    const canVibrate: any = window.navigator.vibrate;
+    if (canVibrate) window.navigator.vibrate(duration);
+  }
 };
