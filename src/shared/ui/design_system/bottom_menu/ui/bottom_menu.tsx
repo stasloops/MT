@@ -27,9 +27,9 @@ export const BottomMenu: FC<Props> = ({ items }) => {
     changeActiveTab(activeTab);
   };
 
-  useEffect(() => {
-    setActiveBlockPercentWidth((window.innerWidth / items.length / 1.2) * 2);
-  }, []);
+  // useEffect(() => {
+  //   setActiveBlockPercentWidth((window.innerWidth / items.length / 1.2) * 2);
+  // }, []);
 
   return (
     <div className={styles.wrapper}>
