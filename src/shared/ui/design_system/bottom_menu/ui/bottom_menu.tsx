@@ -25,7 +25,7 @@ export const BottomMenu: FC<Props> = ({ items }) => {
   const [activeTabBgStyles, apiActiveTabBg] = useSpring(() => ({
     from: {
       x: `${50 * activeTab}%`,
-      width: `${(window?.innerWidth / items.length / 1.2) * 2}px`,
+      width: '300%'
     },
   }));
   const [tabs, apiTabs] = useSprings(
@@ -54,6 +54,12 @@ export const BottomMenu: FC<Props> = ({ items }) => {
       return { width: "200%" };
     });
   };
+
+  useEffect(() => {
+    apiActiveTabBg.start({
+      from: { width: `${(window.innerWidth / items.length / 1.2) * 2}px` },
+    });
+  }, []);
 
   return (
     <div className={styles.wrapper}>
