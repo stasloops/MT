@@ -4,10 +4,11 @@ import withSerwistInit from "@serwist/next";
 
 
 const withSerwist = withSerwistInit({
-    swSrc: "src/shared/lib/serwist/sw.ts",
+    swSrc: "public/sw.ts",
     swDest: "public/sw.js",
     reloadOnOnline: true,
-    
+    register: true,
+
 });
 
 export default withSerwist({

@@ -69,6 +69,8 @@ const InstallButton = () => {
   }, []);
 
   const handleInstallClick = () => {
+    console.log(deferredPrompt, 'dsds');
+    
     if (deferredPrompt) {
       deferredPrompt?.prompt();
       deferredPrompt?.userChoice.then((choiceResult:any) => {
@@ -85,8 +87,8 @@ const InstallButton = () => {
   return (
     <button
       onClick={handleInstallClick}
-      disabled={!deferredPrompt}
-      style={{ marginTop: "40px" }}
+      // disabled={!deferredPrompt}
+      style={{ marginTop: "40px", background: 'red' }}
     >
       Install App
     </button>

@@ -2,7 +2,7 @@ import { MetadataRoute } from "next";
 
 export const APP_NAME = "Magic-Task";
 export const APP_DESCRIPTION = "Magic-Task | MT";
-export const IMAGE = 'favicon.ico'
+export const IMAGE = "favicon.png";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
@@ -17,7 +17,7 @@ export default function manifest(): MetadataRoute.Manifest {
       {
         src: IMAGE,
         sizes: "144x144",
-        type: "image/ico",
+        type: "image/png",
       },
     ],
   };
