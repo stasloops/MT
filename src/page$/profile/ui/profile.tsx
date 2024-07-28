@@ -52,31 +52,30 @@ export const Profile = () => {
   );
 };
 
-
 const InstallButton = () => {
-  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
 
   useEffect(() => {
-    const handler = (e) => {
+    const handler = (e:any) => {
       e.preventDefault();
       setDeferredPrompt(e);
     };
 
-    window.addEventListener('beforeinstallprompt', handler);
+    window.addEventListener("beforeinstallprompt", handler);
 
     return () => {
-      window.removeEventListener('beforeinstallprompt', handler);
+      window.removeEventListener("beforeinstallprompt", handler);
     };
   }, []);
 
   const handleInstallClick = () => {
     if (deferredPrompt) {
-      deferredPrompt.prompt();
-      deferredPrompt?.userChoice.then((choiceResult) => {
-        if (choiceResult.outcome === 'accepted') {
-          console.log('User accepted the install prompt');
+      deferredPrompt?.prompt();
+      deferredPrompt?.userChoice.then((choiceResult:any) => {
+        if (choiceResult.outcome === "accepted") {
+          console.log("User accepted the install prompt");
         } else {
-          console.log('User dismissed the install prompt');
+          console.log("User dismissed the install prompt");
         }
         setDeferredPrompt(null);
       });
@@ -84,7 +83,11 @@ const InstallButton = () => {
   };
 
   return (
-    <button onClick={handleInstallClick} disabled={!deferredPrompt} style={{marginTop: '40px'}}>
+    <button
+      onClick={handleInstallClick}
+      disabled={!deferredPrompt}
+      style={{ marginTop: "40px" }}
+    >
       Install App
     </button>
   );
