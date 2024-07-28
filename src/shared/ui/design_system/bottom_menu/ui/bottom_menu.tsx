@@ -25,7 +25,7 @@ export const BottomMenu: FC<Props> = ({ items }) => {
   const [activeTabBgStyles, apiActiveTabBg] = useSpring(() => ({
     from: {
       x: `${50 * activeTab}%`,
-      width: `${(window.innerWidth / items.length / 1.2) * 2}px`,
+      width: `${(window?.innerWidth / items.length / 1.2) * 2}px`,
     },
   }));
   const [tabs, apiTabs] = useSprings(
