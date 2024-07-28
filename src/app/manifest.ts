@@ -1,7 +1,8 @@
 import { MetadataRoute } from "next";
 
-export const APP_NAME = "Prisma1";
-export const APP_DESCRIPTION = "Prisma - Играй в свою жизнь..";
+export const APP_NAME = "Magic-Task";
+export const APP_DESCRIPTION = "Magic-Task | MT";
+export const IMAGE = 'favicon.ico'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
@@ -10,13 +11,13 @@ export default function manifest(): MetadataRoute.Manifest {
     description: APP_DESCRIPTION,
     start_url: "/",
     display: "standalone",
-    background_color: "#1F1B24git ",
+    background_color: "#1F1B24",
     theme_color: "#1F1B24",
     icons: [
       {
-        src: "favicon.jpg",
+        src: IMAGE,
         sizes: "144x144",
-        type: "image/jpg",
+        type: "image/ico",
       },
     ],
   };

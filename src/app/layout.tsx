@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { APP_DESCRIPTION, APP_NAME } from "./manifest";
+import { APP_DESCRIPTION, APP_NAME, IMAGE } from "./manifest";
 import localFont from "next/font/local";
 import "./globals.css";
 
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     telephone: false,
   },
   openGraph: {
-    images: ["favicon.png"],
+    images: [IMAGE],
     type: "website",
     siteName: APP_NAME,
     title: APP_NAME,
