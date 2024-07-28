@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-
 import { APP_DESCRIPTION, APP_NAME, IMAGE } from "./manifest";
 import localFont from "next/font/local";
 import "./globals.css";
