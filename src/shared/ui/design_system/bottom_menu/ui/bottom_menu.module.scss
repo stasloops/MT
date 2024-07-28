@@ -14,7 +14,6 @@
 
 .item {
   position: relative;
-  width: 100%;
   background: var(--gradient_default);
   padding-top: 5px;
   padding-bottom: 27px;
@@ -30,10 +29,6 @@
     z-index: var(--z_2);
   }
 
-
-  &_active {
-    width: 200%;
-  }
 
   &_border {
     position: absolute;

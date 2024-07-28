@@ -6,6 +6,7 @@ import clsx from "clsx";
 import { useUnit } from "effector-react";
 import { bottom_menu_model } from "../model";
 import { vibrateDevice } from "@/shared/lib/utils/vibrateDevice";
+import { animated, useSpring, useSprings } from "@react-spring/web";
 
 interface Props {
   items: {
@@ -21,57 +22,85 @@ export const BottomMenu: FC<Props> = ({ items }) => {
     bottom_menu_model.$activeTab,
     bottom_menu_model.changeActiveTab,
   ]);
-  const [activeBlockPercentWidth, setActiveBlockPercentWidth] =
-    useState<number>(0);
+  const [activeTabBgStyles, apiActiveTabBg] = useSpring(() => ({
+    from: {
+      x: `${50 * activeTab}%`,
+      width: `${(window.innerWidth / items.length / 1.2) * 2}px`,
+    },
+  }));
+  const [tabs, apiTabs] = useSprings(
+    items.length,
+    (i) => {
+      if (i === activeTab) {
+        return { width: "200%" };
+      }
+      return { width: "100%" };
+    },
+    []
+  );
 
-  const handleClick = (activeTab: number) => {
+  const handleClick = (newActiveTab: number) => {
     vibrateDevice(500);
-    changeActiveTab(activeTab);
+    changeActiveTab(newActiveTab);
+    apiActiveTabBg.start({
+      from: { x: `${50 * activeTab}%` },
+      to: { x: `${50 * newActiveTab}%` },
+      immediate: true,
+    });
+    apiTabs.start((i) => {
+      if (i !== newActiveTab) {
+        return { width: "100%" };
+      }
+      return { width: "200%" };
+    });
   };
-
-  useEffect(() => {
-    setActiveBlockPercentWidth((window.innerWidth / items.length / 1.2) * 2);
-  }, []);
 
   return (
     <div className={styles.wrapper}>
-      <div
+      <animated.div
         className={styles.background}
         style={{
-          width: `${activeBlockPercentWidth}px`,
-          transform: `translateX(${50 * activeTab}%)`,
+          ...activeTabBgStyles,
         }}
-      ></div>
+      ></animated.div>
 
-      {items.map((item, index) => {
-        const Icon = item.icon;
+      {tabs.map(({ width }, index) => {
         const isActive = activeTab === index;
+        const {
+          icon,
+          label,
+          width: iconWidth,
+          height: iconHeight,
+        } = items[index];
+        const Icon = icon;
+
         return (
-          <div
+          <animated.div
             onClick={() => handleClick(index)}
             onPointerDown={() => vibrateDevice(500)}
-            className={clsx(styles.item, isActive && styles.item_active)}
-            key={item.label}
+            className={clsx(styles.item)}
+            style={{ width, transition: "0s" }}
+            key={label}
           >
             <div
               className={clsx(styles.item_border, styles.item_border_left)}
             ></div>
             <Icon
               className={clsx(styles.icon, isActive && styles.icon_active)}
-              width={item.width}
-              height={item.height}
+              width={iconWidth}
+              height={iconHeight}
             />
             <div className={styles.item_label}>
               <div
                 className={clsx(styles.label, isActive && styles.label_active)}
               >
-                {item.label}
+                {label}
               </div>
             </div>
             <div
               className={clsx(styles.item_border, styles.item_border_right)}
             ></div>
-          </div>
+          </animated.div>
         );
       })}
     </div>
