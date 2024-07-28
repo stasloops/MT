@@ -5,10 +5,10 @@ import React from "react";
 import { BookIcon, ChestIcon, MirrorIcon, WheelIcon } from "@/shared/ui/icons";
 import styles from "./page.module.scss";
 import { Route, Router } from "@/shared/lib/router";
-import { Profile } from "@/pagesq/profile";
-import { Items } from "@/pagesq/items";
-import { Tasks } from "@/pagesq/tasks";
-import { Settings } from "@/pagesq/settings";
+import { Profile } from "@/page$/profile";
+import { Items } from "@/page$/items";
+import { Tasks } from "@/page$/tasks";
+import { Settings } from "@/page$/settings";
 
 export default function Home() {
   return (
@@ -17,6 +17,7 @@ export default function Home() {
 
       <Router>
         <div className={styles.background}></div>
+
         <Route component={Profile} />
         <Route component={Items} />
         <Route component={Tasks} />
