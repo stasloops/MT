@@ -7,9 +7,34 @@
 .container {
   position: relative;
   padding: 30px 19px;
-  height: 90%;
-  overflow: hidden;
   text-align: start;
+}
+
+.fire {
+  position: absolute;
+  top: -9px;
+  right: -5px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &_container {
+    position: relative;
+    width: 28px;
+  }
+
+  &_icon {
+    position: absolute;
+    width: 28px;
+  }
+
+  &_count {
+    position: relative;
+    margin-top: 22px;
+    z-index: 1;
+    font-size: 6px !important;
+  }
 }
 
 .front_bg {
@@ -24,4 +49,8 @@
   margin-top: 14px;
   color: var(--color_description);
   font-size: 11px !important;
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }

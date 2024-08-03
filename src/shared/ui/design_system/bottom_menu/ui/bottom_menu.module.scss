@@ -29,7 +29,6 @@
     z-index: var(--z_2);
   }
 
-
   &_border {
     position: absolute;
     top: 0;
@@ -38,14 +37,22 @@
 
     &_left {
       left: 0px;
-      background: rgb(36,35,47);
-      background: linear-gradient(0deg, rgba(36,35,47,1) 0%, rgba(61,58,83,1) 100%);
+      background: rgb(36, 35, 47);
+      background: linear-gradient(
+        0deg,
+        rgba(36, 35, 47, 1) 0%,
+        rgba(61, 58, 83, 1) 100%
+      );
     }
     &_right {
       z-index: 0;
       right: 0;
-      background: rgb(132,120,149);
-      background: linear-gradient(180deg, rgba(132,120,149,1) 0%, rgba(61,58,83,1) 100%);
+      background: rgb(132, 120, 149);
+      background: linear-gradient(
+        180deg,
+        rgba(132, 120, 149, 1) 0%,
+        rgba(61, 58, 83, 1) 100%
+      );
     }
   }
 }
@@ -76,16 +83,6 @@
   color: var(--color);
   font-size: 10px;
   display: none;
-
-  text-shadow: 0px 1px 0 rgb(0, 0, 0), 0px -1px 0 rgb(0, 0, 0),
-    1px 0px 0 rgb(0, 0, 0), -1px 0px 0 rgb(0, 0, 0), 1px 1px 0 rgb(0, 0, 0),
-    1px -1px 0 rgb(0, 0, 0), -1px 1px 0 rgb(0, 0, 0), -1px -1px 0 rgb(0, 0, 0);
-  -webkit-text-shadow: 0px 1px 0 rgb(0, 0, 0), 0px -1px 0 rgb(0, 0, 0),
-    1px 0px 0 rgb(0, 0, 0), -1px 0px 0 rgb(0, 0, 0), 1px 1px 0 rgb(0, 0, 0),
-    1px -1px 0 rgb(0, 0, 0), -1px 1px 0 rgb(0, 0, 0), -1px -1px 0 rgb(0, 0, 0);
-  -moz-text-shadow: 0px 1px 0 rgb(0, 0, 0), 0px -1px 0 rgb(0, 0, 0),
-    1px 0px 0 rgb(0, 0, 0), -1px 0px 0 rgb(0, 0, 0), 1px 1px 0 rgb(0, 0, 0),
-    1px -1px 0 rgb(0, 0, 0), -1px 1px 0 rgb(0, 0, 0), -1px -1px 0 rgb(0, 0, 0);
 
   &_active {
     display: block;

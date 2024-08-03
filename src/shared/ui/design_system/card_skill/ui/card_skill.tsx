@@ -1,9 +1,10 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useState } from "react";
 import styles from "./card_skill.module.scss";
 import { ICardSkill } from "../types";
 import Image from "next/image";
 import { card_skins } from "../config";
 import { Text } from "../../text";
+import fire from "../assets/fire.png";
 
 interface Props {
   item: ICardSkill;
@@ -27,6 +28,15 @@ export const CardSkill: FC<Props> = ({ item }) => {
         src={activeSkin?.front || ""}
         alt="card"
       />
+      <div className={styles.fire}>
+        <div className={styles.fire_container}>
+          <Image className={styles.fire_icon} src={fire} alt="fire" />
+          <Text className={styles.fire_count} as="p" size="text-3">
+            200
+          </Text>
+        </div>
+      </div>
+
       <div className={styles.container}>
         <Text size="text-3" as="h5" className={styles.title}>
           {item.title}

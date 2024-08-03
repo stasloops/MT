@@ -1,9 +1,7 @@
-
-
 import clsx from "clsx";
 import React, { FC } from "react";
 import styles from "./text.module.scss";
-import localFont from 'next/font/local'
+import localFont from "next/font/local";
 
 export const golos = localFont({
   src: "../../../fonts/Golos-Text_Medium.ttf",
@@ -37,7 +35,7 @@ interface Props {
 export const Text: FC<Props> = ({
   children,
   as: Component,
-  font = 'supercell',
+  font = "supercell",
   size,
   textAlign,
   fontWeight,
@@ -49,18 +47,19 @@ export const Text: FC<Props> = ({
   };
 
   return (
-    <div className={styles.wrapper}>
+    // <div className={styles.wrapper}>
       <Component
         className={clsx(
           className,
           styles.text,
           styles[`text--size_${size}`],
-          fonts[font]
+          fonts[font],
+          font === "supercell" && styles.text_shadow
         )}
         style={{ fontWeight, textAlign }}
       >
         {children}
       </Component>
-    </div>
+    // </div>
   );
 };
