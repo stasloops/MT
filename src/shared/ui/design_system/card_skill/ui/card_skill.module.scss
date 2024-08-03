@@ -1,0 +1,27 @@
+.wrapper {
+  position: relative;
+  width: 162px;
+  height: 214px;
+}
+
+.container {
+  position: relative;
+  padding: 30px 19px;
+  height: 90%;
+  overflow: hidden;
+  text-align: start;
+}
+
+.front_bg {
+  position: absolute;
+}
+
+.title {
+  color: var(--color);
+}
+
+.description {
+  margin-top: 14px;
+  color: var(--color_description);
+  font-size: 11px !important;
+}

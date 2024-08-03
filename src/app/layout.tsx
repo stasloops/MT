@@ -1,12 +1,6 @@
 import type { Metadata } from "next";
 import { APP_DESCRIPTION, APP_NAME, IMAGE } from "./manifest";
-import localFont from "next/font/local";
 import "./globals.css";
-
-const supercell = localFont({
-  src: "../shared/ui/fonts/KZSupercell-Magic.ttf",
-  variable: "--supercell",
-});
 
 export const metadata: Metadata = {
   applicationName: APP_NAME,
@@ -37,7 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <body className={supercell.className}>
+      <body>
         <div className="layout">{children}</div>
       </body>
     </html>

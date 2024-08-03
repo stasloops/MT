@@ -1,1 +1,1 @@
-export { Text } from "./ui/text";
+export { Text, golos, supercell } from "./ui/text";

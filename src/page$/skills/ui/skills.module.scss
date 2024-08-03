@@ -1,0 +1,14 @@
+.wrapper {
+  text-align: center;
+  height: 100%;
+}
+
+.skills {
+  margin-top: 30px;
+  padding: 0 16px;
+  padding-bottom: calc(16px + var(--bottom-menu-width));
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}

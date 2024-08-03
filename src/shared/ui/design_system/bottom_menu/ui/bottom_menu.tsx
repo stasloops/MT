@@ -7,6 +7,7 @@ import { useUnit } from "effector-react";
 import { bottom_menu_model } from "../model";
 import { vibrateDevice } from "@/shared/lib/utils/vibrateDevice";
 import { animated, useSpring, useSprings } from "@react-spring/web";
+import { supercell } from "../../text";
 
 interface Props {
   items: {
@@ -98,7 +99,7 @@ export const BottomMenu: FC<Props> = ({ items }) => {
             />
             <div className={styles.item_label}>
               <div
-                className={clsx(styles.label, isActive && styles.label_active)}
+                className={clsx(styles.label, isActive && styles.label_active, supercell.className)}
               >
                 {label}
               </div>

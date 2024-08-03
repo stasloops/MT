@@ -1,7 +1,9 @@
 .wrapper {
   position: relative;
-  height: 100dvh;
   overflow: hidden;
+
+  --header-width: 76px;
+  --bottom-menu-width: 95px;
 }
 
 .background {
