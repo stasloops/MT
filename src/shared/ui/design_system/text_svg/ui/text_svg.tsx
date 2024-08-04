@@ -5,7 +5,7 @@ export const TextSvg = ({ text }: any) => {
 
   return (
     <>
-      <Image src={svg} alt="da" />
+      <Image unoptimized src={svg} alt="da" />
     </>
   );
   //   <text
