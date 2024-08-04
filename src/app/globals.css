@@ -35,3 +35,11 @@ html {
   padding: 0;
   height: 100%;
 }
+
+
+@font-face {
+  font-family: 'super';
+  src: url('../shared/ui/fonts/KZSupercell-Magic.ttf');
+  font-weight: normal;
+  font-style: normal;
+}

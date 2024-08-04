@@ -5,6 +5,7 @@ import Image from "next/image";
 import { card_skins } from "../config";
 import { Text } from "../../text";
 import fire from "../assets/fire.png";
+import { TextSvg } from "../../text_svg";
 
 interface Props {
   item: ICardSkill;
@@ -32,15 +33,25 @@ export const CardSkill: FC<Props> = ({ item }) => {
         <div className={styles.fire_container}>
           <Image className={styles.fire_icon} src={fire} alt="fire" />
           <Text className={styles.fire_count} as="p" size="text-3">
-            200
+            {item.streak}
           </Text>
         </div>
       </div>
 
       <div className={styles.container}>
-        <Text size="text-3" as="h5" className={styles.title}>
+        <TextSvg
+          text={item.title}
+          fontFamily="Golos Text Medium" // Используйте имя шрифта, определенное в @font-face
+          fontSize="24px"
+          fill="white"
+          stroke="red"
+          strokeWidth={2}
+          x={0}
+          y={10}
+        />
+        {/* <Text size="text-3" as="h5" className={styles.title}>
           {item.title}
-        </Text>
+        </Text> */}
         <Text size="text-2" as="h5" font="golos" className={styles.description}>
           {item.description}
         </Text>

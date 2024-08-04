@@ -11,12 +11,16 @@ export const Skills = () => {
       title: "Делать зарядку",
       description:
         "Приобретенный скилл не может быть утрачен в течении 30 дней после получения. После истечения 30 дней, происходит переосмотр и скилл будет продлен на 30",
+      streak: 4,
     },
-    { id: 2, skin_id: 2 },
-    { id: 3, skin_id: 1 },
-    { id: 4, skin_id: 2 },
-    { id: 5, skin_id: 2 },
-    { id: 6, skin_id: 2 },
+    {
+      id: 2,
+      skin_id: 2,
+      title: "Делать зарядку",
+      description:
+        "Приобретенный скилл не может быть утрачен в течении 30 дней после получения. После истечения 30 дней, происходит переосмотр и скилл будет продлен на 30",
+      streak: 78,
+    },
   ];
   return (
     <div className={styles.wrapper}>
@@ -24,10 +28,12 @@ export const Skills = () => {
         Навыки
       </Text>
 
-      <div className={styles.skills}>
-        {items.map((item) => {
-          return <CardSkill key={item.id} item={item} />;
-        })}
+      <div className={styles.skills_container}>
+        <div className={styles.skills}>
+          {items.map((item) => {
+            return <CardSkill key={item.id} item={item} />;
+          })}
+        </div>
       </div>
     </div>
   );

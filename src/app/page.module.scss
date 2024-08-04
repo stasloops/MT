@@ -1,7 +1,8 @@
 .wrapper {
   position: relative;
   overflow: hidden;
-
+  min-height: 100dvh;
+  
   --header-width: 76px;
   --bottom-menu-width: 95px;
 }
