@@ -3,7 +3,7 @@ import React from "react";
 
 export const Items = () => {
   return (
-    <Text textAlign="center" as="h1" size="title">
+    <Text textAlign="center" variant='h1'>
       Items
     </Text>
   );

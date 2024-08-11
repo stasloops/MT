@@ -4,9 +4,11 @@
 
 :root {
   --color: #fff;
-  --color_description: #9DA3B6;
+  --color_description: #9da3b6;
 
   --background: #1b181f;
+
+  --purple1: #4d425a;
 
   --border_selected: #9472d0;
 
@@ -36,10 +38,5 @@ html {
   height: 100%;
 }
 
-
-@font-face {
-  font-family: 'super';
-  src: url('../shared/ui/fonts/KZSupercell-Magic.ttf');
-  font-weight: normal;
-  font-style: normal;
+.layout {
 }

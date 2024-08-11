@@ -1,13 +1,13 @@
 "use client";
 
-import React, { ElementType, FC, useEffect, useState } from "react";
+import React, { ElementType, FC, useEffect } from "react";
 import styles from "./bottom_menu.module.scss";
 import clsx from "clsx";
 import { useUnit } from "effector-react";
 import { bottom_menu_model } from "../model";
 import { vibrateDevice } from "@/shared/lib/utils/vibrateDevice";
 import { animated, useSpring, useSprings } from "@react-spring/web";
-import { supercell } from "../../text";
+import { Text } from "../../text";
 
 interface Props {
   items: {
@@ -26,7 +26,7 @@ export const BottomMenu: FC<Props> = ({ items }) => {
   const [activeTabBgStyles, apiActiveTabBg] = useSpring(() => ({
     from: {
       x: `${50 * activeTab}%`,
-      width: '300%'
+      width: "300%",
     },
   }));
   const [tabs, apiTabs] = useSprings(
@@ -98,11 +98,12 @@ export const BottomMenu: FC<Props> = ({ items }) => {
               height={iconHeight}
             />
             <div className={styles.item_label}>
-              <div
-                className={clsx(styles.label, isActive && styles.label_active, supercell.className)}
+              <Text
+                variant="h3"
+                className={clsx(styles.label, isActive && styles.label_active)}
               >
                 {label}
-              </div>
+              </Text>
             </div>
             <div
               className={clsx(styles.item_border, styles.item_border_right)}

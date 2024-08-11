@@ -5,7 +5,6 @@ import Image from "next/image";
 import { card_skins } from "../config";
 import { Text } from "../../text";
 import fire from "../assets/fire.png";
-import { TextSvg } from "../../text_svg";
 
 interface Props {
   item: ICardSkill;
@@ -19,12 +18,13 @@ export const CardSkill: FC<Props> = ({ item }) => {
 
   return (
     <div
-      style={{ transform: isDown ? "scale(1.05)" : "", transition: "0.5s" }}
+      style={{ transform: isDown ? "scale(1.05)" : "", transition: "0.3s" }}
       className={styles.wrapper}
       onPointerDown={() => setIsDown(true)}
       onPointerUp={() => setIsDown(false)}
     >
       <Image
+        unoptimized={true}
         className={styles.front_bg}
         src={activeSkin?.front || ""}
         alt="card"
@@ -32,27 +32,21 @@ export const CardSkill: FC<Props> = ({ item }) => {
       <div className={styles.fire}>
         <div className={styles.fire_container}>
           <Image className={styles.fire_icon} src={fire} alt="fire" />
-          <Text className={styles.fire_count} as="p" size="text-3">
+          <Text
+            className={styles.fire_count}
+            textAlign="center"
+            variant="numeration"
+          >
             {item.streak}
           </Text>
         </div>
       </div>
 
       <div className={styles.container}>
-        <TextSvg
-          text={item.title}
-          fontFamily="Golos Text Medium" // Используйте имя шрифта, определенное в @font-face
-          fontSize="24px"
-          fill="white"
-          stroke="red"
-          strokeWidth={2}
-          x={0}
-          y={10}
-        />
-        {/* <Text size="text-3" as="h5" className={styles.title}>
+        <Text textAlign="center" variant="h3">
           {item.title}
-        </Text> */}
-        <Text size="text-2" as="h5" font="golos" className={styles.description}>
+        </Text>
+        <Text className={styles.description} variant="description">
           {item.description}
         </Text>
       </div>

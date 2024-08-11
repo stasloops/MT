@@ -1,6 +1,6 @@
 .wrapper {
+  position: relative;
   text-align: center;
-  height: 100%;
 }
 
 .skills {
@@ -15,5 +15,26 @@
   &_container {
     width: 340px;
     margin: 0 auto;
+  }
+}
+
+.add_skill {
+  position: fixed;
+  transition: 0.5s;
+  right: 16px;
+
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background-color: var(--purple1);
+  border: 1px solid var(--border);
+  border-width: 1px 1px 3px 1px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &_icon {
+    width: 24px;
   }
 }

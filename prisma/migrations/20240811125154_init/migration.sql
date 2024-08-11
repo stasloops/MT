@@ -36,8 +36,10 @@ CREATE TABLE "Task" (
 -- CreateTable
 CREATE TABLE "Skill" (
     "id" SERIAL NOT NULL,
-    "title" TEXT NOT NULL,
-    "description" TEXT NOT NULL,
+    "user_id" INTEGER NOT NULL,
+    "skin_id" INTEGER NOT NULL,
+    "title" TEXT NOT NULL DEFAULT '',
+    "description" TEXT NOT NULL DEFAULT '',
     "streak" INTEGER NOT NULL DEFAULT 0,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "endDate" TIMESTAMP(3),

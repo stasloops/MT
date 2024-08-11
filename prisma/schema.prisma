@@ -43,8 +43,10 @@ model Task {
 
 model Skill {
   id           Int       @id @default(autoincrement())
-  title        String
-  description  String
+  user_id      Int
+  skin_id      Int
+  title        String    @default("")
+  description  String    @default("")
   streak       Int       @default(0)
   createdAt    DateTime  @default(now())
   endDate      DateTime?

@@ -11,7 +11,7 @@ export const Header = () => {
           <NewsIcon className={styles.news_icon} />
           <div className={styles.coins}>
             <CoinIcon className={styles.coins_icon} />
-            <Text as="p" size="text-3" className={styles.coins_count}>
+            <Text className={styles.coins_count} variant="h3">
               30 990
             </Text>
           </div>

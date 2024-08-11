@@ -6,3 +6,6 @@ export const POST = async () => {
 
 }
 
+export const PUT = async () => {
+    
+}

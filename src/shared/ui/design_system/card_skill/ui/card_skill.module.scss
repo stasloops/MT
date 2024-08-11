@@ -2,6 +2,8 @@
   position: relative;
   width: 162px;
   height: 214px;
+  will-change: contents;
+  user-select: none;
 }
 
 .container {
@@ -33,7 +35,6 @@
     position: relative;
     margin-top: 22px;
     z-index: 1;
-    font-size: 6px !important;
   }
 }
 
@@ -49,8 +50,9 @@
   margin-top: 14px;
   color: var(--color_description);
   font-size: 11px !important;
+  line-height: 130%;
   display: -webkit-box;
-  -webkit-line-clamp: 8;
+  -webkit-line-clamp: 9;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }

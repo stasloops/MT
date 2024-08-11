@@ -20,7 +20,7 @@ export const Profile = () => {
 
   return (
     <div>
-      <Text textAlign="center" as="h1" size="title">
+      <Text textAlign="center" variant="h1">
         Profile
       </Text>
       <div className="mt-4">
@@ -56,7 +56,7 @@ const InstallButton = () => {
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
 
   useEffect(() => {
-    const handler = (e:any) => {
+    const handler = (e: any) => {
       e.preventDefault();
       setDeferredPrompt(e);
     };
@@ -69,11 +69,11 @@ const InstallButton = () => {
   }, []);
 
   const handleInstallClick = () => {
-    console.log(deferredPrompt, 'dsds');
-    
+    console.log(deferredPrompt, "dsds");
+
     if (deferredPrompt) {
       deferredPrompt?.prompt();
-      deferredPrompt?.userChoice.then((choiceResult:any) => {
+      deferredPrompt?.userChoice.then((choiceResult: any) => {
         if (choiceResult.outcome === "accepted") {
           console.log("User accepted the install prompt");
         } else {
@@ -88,7 +88,7 @@ const InstallButton = () => {
     <button
       onClick={handleInstallClick}
       // disabled={!deferredPrompt}
-      style={{ marginTop: "40px", background: 'red' }}
+      style={{ marginTop: "40px", background: "red" }}
     >
       Install App
     </button>

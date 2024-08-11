@@ -13,53 +13,80 @@ export const supercell = localFont({
   variable: "--supercell",
 });
 
-type Size = "title" | "title-2" | "text" | "text-2" | "text-3";
-
 type As = keyof Pick<
   JSX.IntrinsicElements,
   "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "p" | "span"
 >;
 
-type FontWight = 400 | 700;
+interface TextType {
+  fontFamily: string;
+  className: string;
+  as: As;
+  isShadow: boolean;
+}
+
+type TextVariants = "h1" | "h2" | "h3" | "description" | "numeration";
+
+const TEXT_VARIANTS_CONFIG: Record<TextVariants, TextType> = {
+  h1: {
+    fontFamily: supercell.className,
+    className: "h1",
+    as: "h1",
+    isShadow: true,
+  },
+  h2: {
+    fontFamily: supercell.className,
+    className: "h2",
+    as: "h2",
+    isShadow: true,
+  },
+  h3: {
+    fontFamily: supercell.className,
+    className: "h3",
+    as: "h3",
+    isShadow: true,
+  },
+  description: {
+    fontFamily: golos.className,
+    className: "description",
+    as: "p",
+    isShadow: false,
+  },
+  numeration: {
+    fontFamily: supercell.className,
+    className: "numeration",
+    as: "p",
+    isShadow: true,
+  },
+};
 
 interface Props {
   children: React.ReactNode;
-  size: Size;
-  as: As;
-  font?: "golos" | "supercell";
+  variant: TextVariants;
   textAlign?: "left" | "center" | "right";
-  fontWeight?: FontWight;
   className?: string;
 }
 
 export const Text: FC<Props> = ({
   children,
-  as: Component,
-  font = "supercell",
-  size,
+  variant,
   textAlign,
-  fontWeight,
   className,
 }) => {
-  const fonts = {
-    golos: golos.className,
-    supercell: supercell.className,
-  };
-
+  const currentTextVariant = TEXT_VARIANTS_CONFIG[variant];
+  const Component = currentTextVariant.as;
   return (
-    // <div className={styles.wrapper}>
-      <Component
-        className={clsx(
-          className,
-          styles.text,
-          styles[`text--size_${size}`],
-          fonts[font],
-          font === "supercell" && styles.text_shadow
-        )}
-        style={{ fontWeight, textAlign }}
-      >
-        {children}
-      </Component>
-    // </div>
+    <Component
+      className={clsx(
+        className,
+        styles.text,
+        styles[`text--variant-${currentTextVariant.className}`],
+        currentTextVariant.fontFamily,
+        currentTextVariant.isShadow && styles.text_shadow
+      )}
+      style={{ textAlign }}
+    >
+      {children}
+    </Component>
   );
 };

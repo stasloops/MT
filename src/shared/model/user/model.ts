@@ -1,4 +1,4 @@
-import { IUser } from "@/server/user/types";
+import { IUser } from "../../../server/user/types";
 import { createEffect, restore, sample } from "effector";
 import { getUser } from "./api";
 

@@ -1,5 +1,5 @@
 import { IUser } from "../user/types";
-import jwt, { JwtPayload } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import crypto from "crypto";
 
 const signToken = (userData: Partial<IUser>) => {
