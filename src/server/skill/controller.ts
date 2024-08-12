@@ -4,24 +4,29 @@ import { cookies } from "next/headers";
 import { authService, VerifyToken } from "../auth/service";
 import { card_skins } from "@/shared/ui/design_system/card_skill/config";
 
+const getUserId = () => {
+  let token = cookies().get("Authorization")?.value;
+  const validData: VerifyToken = authService.verifyToken(String(token));
+
+  return validData?.data?.telegram_id;
+};
+
 export const GET = async (req: Request, res: Response) => {
   try {
-    let token = cookies().get("Authorization")?.value;
-    const validData: VerifyToken = authService.verifyToken(String(token));
+    const user_id = getUserId();
 
-    if (!validData) {
+    if (!user_id) {
       return NextResponse.json(
         { message: "Не валидный токен!" },
         { status: 401 }
       );
     }
 
-    const telegram_id = validData?.data?.telegram_id;
     const skills = await prisma.skill.findMany({
-      where: { user_id: telegram_id },
+      where: { user_id: user_id },
     });
 
-    return NextResponse.json({ skills }, { status: 200 });
+    return NextResponse.json(skills.reverse(), { status: 200 });
   } catch (e) {
     return NextResponse.json({ error: e }, { status: 500 });
   }
@@ -29,18 +34,16 @@ export const GET = async (req: Request, res: Response) => {
 
 export const POST = async (req: Request, res: Response) => {
   try {
-    let token = cookies().get("Authorization")?.value;
-    const validData: VerifyToken = authService.verifyToken(String(token));
+    const { skin_id } = await req.json();
+    const user_id = getUserId();
 
-    if (!validData) {
+    if (!user_id) {
       return NextResponse.json(
         { message: "Не валидный токен!" },
         { status: 401 }
       );
     }
 
-    const telegram_id = validData?.data?.telegram_id;
-    const { skin_id } = await req.json();
     const skin = card_skins.find((i) => i.id === skin_id);
 
     if (!skin) {
@@ -51,10 +54,10 @@ export const POST = async (req: Request, res: Response) => {
     }
 
     const skill = await prisma.skill.create({
-      data: { user_id: telegram_id, skin_id: skin_id },
+      data: { user_id: user_id, skin_id: skin_id },
     });
 
-    return NextResponse.json({ skill }, { status: 200 });
+    return NextResponse.json(skill, { status: 200 });
   } catch (e) {
     return NextResponse.json({ error: e }, { status: 500 });
   }
@@ -63,9 +66,21 @@ export const POST = async (req: Request, res: Response) => {
 export const PUT = async (req: Request, res: Response) => {
   try {
     const { id, ...rest } = await req.json();
+    const user_id = getUserId();
+
+    const skill = await prisma.skill.findUnique({
+      where: { id: id },
+    });
+
+    if (!user_id || skill?.user_id !== user_id) {
+      return NextResponse.json(
+        { message: "Не валидный токен!" },
+        { status: 401 }
+      );
+    }
 
     await prisma.skill.update({
-      where: { id },
+      where: { id: id },
       data: { ...rest },
     });
   } catch (e) {
@@ -73,4 +88,31 @@ export const PUT = async (req: Request, res: Response) => {
   }
 };
 
-export const DELETE = async () => {};
+export const DELETE = async (req: Request, res: Response) => {
+  try {
+    const { id } = await req.json();
+    const user_id = getUserId();
+
+    const skill = await prisma.skill.findUnique({
+      where: { id: id },
+    });
+
+    if (!user_id || skill?.user_id !== user_id) {
+      return NextResponse.json(
+        { message: "Не валидный токен!" },
+        { status: 401 }
+      );
+    }
+
+    await prisma.skill.delete({
+      where: { id: id },
+    });
+
+    return NextResponse.json(
+      { message: "Навык успешно удален" },
+      { status: 200 }
+    );
+  } catch (e) {
+    return NextResponse.json({ error: e }, { status: 500 });
+  }
+};

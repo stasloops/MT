@@ -9,25 +9,6 @@ import { createPortal } from "react-dom";
 import { bottom_menu_model } from "@/shared/ui/design_system/bottom_menu";
 import { PlusIcon } from "@/shared/ui/icons";
 
-const items: any[] = [
-  {
-    id: 1,
-    skin_id: 1,
-    title: "Делать зарядку",
-    description:
-      "Приобретенный скилл не может быть утрачен в течении 30 дней после получения. После истечения 30 дней, происходит переосмотр и скилл будет продлен на 30",
-    streak: 4,
-  },
-  {
-    id: 2,
-    skin_id: 2,
-    title: "Делать зарядку",
-    description:
-      "Приобретенный скилл не может быть утрачен в течении 30 дней после получения. После истечения 30 дней, происходит переосмотр и скилл будет продлен на 30",
-    streak: 78,
-  },
-];
-
 export const Skills = () => {
   const [skills, fetchSkills, addSkill] = useUnit([
     skills_model.$skills,
@@ -62,7 +43,7 @@ export const Skills = () => {
         >
           <PlusIcon   className={styles.add_skill_icon} />
         </div>,
-        document.body
+        document?.body
       )}
     </div>
   );
