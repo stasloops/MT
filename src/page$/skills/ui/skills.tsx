@@ -35,7 +35,7 @@ export const Skills = () => {
         </div>
       </div>
 
-      {window
+      {typeof window !== "undefined"
         ? createPortal(
             <div
               style={{ bottom: activeTab === 1 ? "110px" : "0" }}
