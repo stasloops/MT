@@ -35,16 +35,18 @@ export const Skills = () => {
         </div>
       </div>
 
-      {createPortal(
-        <div
-          style={{ bottom: activeTab === 1 ? "110px" : "0" }}
-          onClick={() => addSkill(card_skins[1].id)}
-          className={styles.add_skill}
-        >
-          <PlusIcon   className={styles.add_skill_icon} />
-        </div>,
-        document?.body
-      )}
+      {window
+        ? createPortal(
+            <div
+              style={{ bottom: activeTab === 1 ? "110px" : "0" }}
+              onClick={() => addSkill(card_skins[1].id)}
+              className={styles.add_skill}
+            >
+              <PlusIcon className={styles.add_skill_icon} />
+            </div>,
+            document?.body
+          )
+        : null}
     </div>
   );
 };
