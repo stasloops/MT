@@ -2,7 +2,6 @@
 
 import React, { FC } from "react";
 import styles from "./button.module.scss";
-import { Text } from "../../text";
 
 interface Props {
   children: React.ReactNode;

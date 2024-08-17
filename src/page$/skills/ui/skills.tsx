@@ -4,7 +4,6 @@ import React, { useEffect } from "react";
 import styles from "./skills.module.scss";
 import { useUnit } from "effector-react";
 import { skills_model } from "../model";
-import { card_skins } from "@/shared/ui/design_system/card_skill/config";
 import { createPortal } from "react-dom";
 import { bottom_menu_model } from "@/shared/ui/design_system/bottom_menu";
 import { PlusIcon } from "@/shared/ui/icons";
@@ -12,7 +11,7 @@ import { Popup } from "@/shared/ui/design_system";
 import { usePopup } from "@/shared/lib";
 
 export const Skills = () => {
-  const [skills, fetchSkills, addSkill] = useUnit([
+  const [skills, fetchSkills] = useUnit([
     skills_model.$skills,
     skills_model.fetchSkillsFx,
     skills_model.addSkillFx,
