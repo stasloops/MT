@@ -51,11 +51,11 @@ const create = async ({
 };
 
 const update = async (userData: Partial<IUser>) => {
-  const { telegram_id, ...data } = userData;
+  const { telegram_id, skills, ...data } = userData;
 
   const newUser = await prisma.user.update({
     where: { telegram_id },
-    data: data,
+    data: { ...data },
   });
 
   return newUser;
