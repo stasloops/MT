@@ -31,3 +31,5 @@ export const Popup = forwardRef<HTMLDivElement, Props>(
     );
   }
 );
+
+Popup.displayName = 'Popup';
