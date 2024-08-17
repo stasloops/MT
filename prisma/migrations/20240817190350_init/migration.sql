@@ -12,7 +12,6 @@ CREATE TABLE "User" (
     "balance" INTEGER NOT NULL DEFAULT 0,
     "streak" INTEGER NOT NULL DEFAULT 0,
     "tasks" INTEGER[],
-    "skills" INTEGER[],
     "skills_limit" INTEGER NOT NULL DEFAULT 5,
     "debuffs" INTEGER[],
     "debuffs_limit" INTEGER NOT NULL DEFAULT 5,
@@ -36,8 +35,8 @@ CREATE TABLE "Task" (
 -- CreateTable
 CREATE TABLE "Skill" (
     "id" SERIAL NOT NULL,
-    "user_id" INTEGER NOT NULL,
-    "skin_id" INTEGER NOT NULL,
+    "userId" INTEGER,
+    "skinId" INTEGER NOT NULL,
     "title" TEXT NOT NULL DEFAULT '',
     "description" TEXT NOT NULL DEFAULT '',
     "streak" INTEGER NOT NULL DEFAULT 0,
@@ -49,6 +48,13 @@ CREATE TABLE "Skill" (
     CONSTRAINT "Skill_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "SkillCardSkin" (
+    "id" INTEGER NOT NULL,
+
+    CONSTRAINT "SkillCardSkin_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "User_id_key" ON "User"("id");
 
@@ -57,3 +63,6 @@ CREATE UNIQUE INDEX "User_telegram_id_key" ON "User"("telegram_id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_telegram_username_key" ON "User"("telegram_username");
+
+-- AddForeignKey
+ALTER TABLE "Skill" ADD CONSTRAINT "Skill_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;

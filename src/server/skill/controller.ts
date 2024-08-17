@@ -13,9 +13,9 @@ const getUserId = () => {
 
 export const GET = async (req: Request, res: Response) => {
   try {
-    const user_id = getUserId();
+    const userId = getUserId();
 
-    if (!user_id) {
+    if (!userId) {
       return NextResponse.json(
         { message: "Не валидный токен!" },
         { status: 401 }
@@ -23,7 +23,7 @@ export const GET = async (req: Request, res: Response) => {
     }
 
     const skills = await prisma.skill.findMany({
-      where: { user_id: user_id },
+      where: { userId: userId },
     });
 
     return NextResponse.json(skills.reverse(), { status: 200 });
@@ -35,9 +35,9 @@ export const GET = async (req: Request, res: Response) => {
 export const POST = async (req: Request, res: Response) => {
   try {
     const { skin_id } = await req.json();
-    const user_id = getUserId();
+    const userId = getUserId();
 
-    if (!user_id) {
+    if (!userId) {
       return NextResponse.json(
         { message: "Не валидный токен!" },
         { status: 401 }
@@ -54,7 +54,7 @@ export const POST = async (req: Request, res: Response) => {
     }
 
     const skill = await prisma.skill.create({
-      data: { user_id: user_id, skin_id: skin_id },
+      data: { userId: userId, skinId: skin_id },
     });
 
     return NextResponse.json(skill, { status: 200 });
@@ -66,13 +66,13 @@ export const POST = async (req: Request, res: Response) => {
 export const PUT = async (req: Request, res: Response) => {
   try {
     const { id, ...rest } = await req.json();
-    const user_id = getUserId();
+    const userId = getUserId();
 
     const skill = await prisma.skill.findUnique({
       where: { id: id },
     });
 
-    if (!user_id || skill?.user_id !== user_id) {
+    if (!userId || skill?.userId !== userId) {
       return NextResponse.json(
         { message: "Не валидный токен!" },
         { status: 401 }
@@ -91,13 +91,13 @@ export const PUT = async (req: Request, res: Response) => {
 export const DELETE = async (req: Request, res: Response) => {
   try {
     const { id } = await req.json();
-    const user_id = getUserId();
+    const userId = getUserId();
 
     const skill = await prisma.skill.findUnique({
       where: { id: id },
     });
 
-    if (!user_id || skill?.user_id !== user_id) {
+    if (!userId || skill?.userId !== userId) {
       return NextResponse.json(
         { message: "Не валидный токен!" },
         { status: 401 }

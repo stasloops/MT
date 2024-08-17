@@ -25,7 +25,7 @@ model User {
   balance           Int      @default(0)
   streak            Int      @default(0)
   tasks             Int[]
-  skills            Int[]
+  skills            Skill[]
   skills_limit      Int      @default(5)
   debuffs           Int[]
   debuffs_limit     Int      @default(5)
@@ -43,8 +43,9 @@ model Task {
 
 model Skill {
   id           Int       @id @default(autoincrement())
-  user_id      Int
-  skin_id      Int
+  user         User?     @relation(fields: [userId], references: [id])
+  userId       Int?
+  skinId       Int
   title        String    @default("")
   description  String    @default("")
   streak       Int       @default(0)
@@ -52,6 +53,10 @@ model Skill {
   endDate      DateTime?
   activePeriod DateTime?
   replay       Replay?
+}
+
+model SkillCardSkin {
+  id Int @id
 }
 
 enum Replay {
