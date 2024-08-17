@@ -3,6 +3,21 @@
 @tailwind utilities;
 
 :root {
+  /* text */
+  --primary_text: #ffffff;
+  --dissolve_text: #878787;
+
+  /* border */
+  --primary_button_border: #340073;
+  --popup_border: #7d7288;
+
+  /* background */
+  --primary_button: #752ad1;
+  --dark_popup_background: #1e1a23;
+  --light_popup_background: #2a2530;
+
+  /*  other*/
+
   --color: #fff;
   --color_description: #9da3b6;
 

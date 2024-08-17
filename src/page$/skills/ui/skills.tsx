@@ -8,6 +8,8 @@ import { card_skins } from "@/shared/ui/design_system/card_skill/config";
 import { createPortal } from "react-dom";
 import { bottom_menu_model } from "@/shared/ui/design_system/bottom_menu";
 import { PlusIcon } from "@/shared/ui/icons";
+import { Popup } from "@/shared/ui/design_system";
+import { usePopup } from "@/shared/lib";
 
 export const Skills = () => {
   const [skills, fetchSkills, addSkill] = useUnit([
@@ -16,37 +18,46 @@ export const Skills = () => {
     skills_model.addSkillFx,
   ]);
   const [activeTab] = useUnit([bottom_menu_model.$activeTab]);
+  const { ref, isOpen, setIsOpen } = usePopup();
 
   useEffect(() => {
     fetchSkills();
   }, []);
 
   return (
-    <div className={styles.wrapper}>
-      <Text textAlign="center" variant="h1">
-        Навыки
-      </Text>
+    <>
+      <div className={styles.wrapper}>
+        <Text textAlign="center" variant="h1">
+          Навыки
+        </Text>
 
-      <div className={styles.skills_container}>
-        <div className={styles.skills}>
-          {skills.map((item: ISkill) => {
-            return <CardSkill key={item.id} item={item} />;
-          })}
+        <div className={styles.skills_container}>
+          <div className={styles.skills}>
+            {skills.map((item: ISkill) => {
+              return <CardSkill key={item.id} item={item} />;
+            })}
+          </div>
         </div>
+
+        {typeof window !== "undefined"
+          ? createPortal(
+              <div
+                style={{ bottom: activeTab === 1 ? "110px" : "0" }}
+                onClick={() => setIsOpen(true)}
+                className={styles.add_skill}
+              >
+                <PlusIcon className={styles.add_skill_icon} />
+              </div>,
+              document?.body
+            )
+          : null}
       </div>
 
-      {typeof window !== "undefined"
-        ? createPortal(
-            <div
-              style={{ bottom: activeTab === 1 ? "110px" : "0" }}
-              onClick={() => addSkill(card_skins[1].id)}
-              className={styles.add_skill}
-            >
-              <PlusIcon className={styles.add_skill_icon} />
-            </div>,
-            document?.body
-          )
-        : null}
-    </div>
+      {isOpen && (
+        <Popup title="Выбери скин скилла" ref={ref}>
+          <div></div>
+        </Popup>
+      )}
+    </>
   );
 };

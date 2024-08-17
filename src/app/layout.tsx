@@ -24,34 +24,14 @@ export const metadata: Metadata = {
   },
   icons: [
     {
-      rel: "icon",
-      sizes: "16x16",
-      type: "image/png",
-      url: "/favicons/favicon.ico",
-    },
-    {
-      rel: "icon",
-      sizes: "16x16",
-      type: "image/png",
-      url: "/favicons/favicon-16x16.png",
-    },
-    {
-      rel: "icon",
-      sizes: "32x32",
-      type: "image/png",
-      url: "/favicons/favicon-32x32.png",
-    },
-    {
-      rel: "mask-icon",
-      sizes: "400x400",
-      type: "image/png",
-      url: "/favicons/safari-pinned-tab-400x400.png",
+      rel: "apple-touch-icon",
+      url: "/assets/pwa/apple-icon-192x192.png",
+      sizes: "192x192",
     },
     {
       rel: "apple-touch-icon",
-      sizes: "192x192",
-      type: "image/png",
-      url: "/assets/pwa/apple-icon-192x192.png",
+      url: "/assets/pwa/apple-icon-512x512.png",
+      sizes: "512x512",
     },
   ],
 };

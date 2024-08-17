@@ -25,7 +25,13 @@ interface TextType {
   isShadow: boolean;
 }
 
-type TextVariants = "h1" | "h2" | "h3" | "description" | "numeration";
+type TextVariants =
+  | "h1"
+  | "h2"
+  | "h3"
+  | "button_primary"
+  | "description"
+  | "numeration";
 
 const TEXT_VARIANTS_CONFIG: Record<TextVariants, TextType> = {
   h1: {
@@ -46,6 +52,13 @@ const TEXT_VARIANTS_CONFIG: Record<TextVariants, TextType> = {
     as: "h3",
     isShadow: true,
   },
+  button_primary: {
+    fontFamily: supercell.className,
+    className: "button_primary",
+    as: "span",
+    isShadow: true,
+  },
+
   description: {
     fontFamily: golos.className,
     className: "description",

@@ -1,5 +1,5 @@
 .text {
-  color: var(--color);
+  color: var(--primary_text);
   z-index: 2;
 
   &--variant {
@@ -13,6 +13,10 @@
     }
     &-h3 {
       font-size: 10px;
+      font-weight: 700;
+    }
+    &-button_primary {
+      font-size: 12px;
       font-weight: 700;
     }
     &-description {
