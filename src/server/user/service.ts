@@ -35,9 +35,9 @@ const create = async ({
       return null;
     }
 
-    const defaultSkillCardSkins: SkillCardSkin[] = [
-      { id: 1, quantity: 2, quantityLeft: 2, userId: id },
-      { id: 2, quantity: 2, quantityLeft: 2, userId: id },
+    const defaultSkillCardSkins: Omit<SkillCardSkin, 'id'>[] = [
+      { skinId: 1, quantity: 2, quantityLeft: 2, userId: id },
+      { skinId: 2, quantity: 2, quantityLeft: 2, userId: id },
     ];
 
     const newUser: User = await prisma.user.create({

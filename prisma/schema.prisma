@@ -30,7 +30,8 @@ model User {
 }
 
 model SkillCardSkin {
-  id           Int  @id
+  id           Int  @id @default(autoincrement())
+  skinId       Int
   userId       Int
   user         User @relation(fields: [userId], references: [id])
   quantity     Int
