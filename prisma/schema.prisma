@@ -26,12 +26,12 @@ model User {
   streak            Int             @default(0)
   tasks             Int[]
   skills            Skill[]
-  skillCardSkins    SkillCardSkin[]     
+  skillCardSkins    SkillCardSkin[]
   createdAt         DateTime        @default(now())
 }
 
 model SkillCardSkin {
-  id           Int  @id @default(autoincrement())
+  id           Int  @id
   userId       Int
   user         User @relation(fields: [userId], references: [id])
   quantity     Int
@@ -60,7 +60,6 @@ model Skill {
   activePeriod DateTime?
   replay       Replay?
 }
-
 
 enum Replay {
   ALL
