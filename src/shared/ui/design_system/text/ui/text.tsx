@@ -68,7 +68,7 @@ const TEXT_VARIANTS_CONFIG: Record<TextVariants, TextType> = {
   numeration: {
     fontFamily: supercell.className,
     className: "numeration",
-    as: "p",
+    as: "span",
     isShadow: true,
   },
 };

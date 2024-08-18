@@ -8,7 +8,8 @@ import { createPortal } from "react-dom";
 import { bottom_menu_model } from "@/shared/ui/design_system/bottom_menu";
 import { PlusIcon } from "@/shared/ui/icons";
 import { Popup } from "@/shared/ui/design_system";
-import { usePopup } from "@/shared/lib";
+import { useIsClient, usePopup } from "@/shared/lib";
+import { ICardSkill } from "@/shared/ui/design_system/card_skill/types";
 
 export const Skills = () => {
   const [skills, fetchSkills] = useUnit([
@@ -17,6 +18,7 @@ export const Skills = () => {
     skills_model.addSkillFx,
   ]);
   const [activeTab] = useUnit([bottom_menu_model.$activeTab]);
+  const isClient = useIsClient();
   const { ref, isOpen, setIsOpen } = usePopup();
 
   useEffect(() => {
@@ -32,13 +34,13 @@ export const Skills = () => {
 
         <div className={styles.skills_container}>
           <div className={styles.skills}>
-            {skills.map((item: ISkill) => {
+            {skills.map((item: ICardSkill) => {
               return <CardSkill key={item.id} item={item} />;
             })}
           </div>
         </div>
 
-        {typeof window !== "undefined"
+        {isClient
           ? createPortal(
               <div
                 style={{ bottom: activeTab === 1 ? "110px" : "0" }}
@@ -53,7 +55,11 @@ export const Skills = () => {
       </div>
 
       {isOpen && (
-        <Popup title="Выбери скин скилла" ref={ref}>
+        <Popup
+          title="Выбери скин скилла"
+          button={{ text: "Подтвердить", onClick: () => console.log("log") }}
+          ref={ref}
+        >
           <div></div>
         </Popup>
       )}

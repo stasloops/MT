@@ -4,13 +4,15 @@ import React, { forwardRef } from "react";
 import styles from "./popup.module.scss";
 import { Text } from "../../text";
 import { createPortal } from "react-dom";
+import { Button } from "../../button";
 
 interface Props {
   title: string;
+  button?: { text: string; onClick: () => void };
   children: React.ReactNode;
 }
 export const Popup = forwardRef<HTMLDivElement, Props>(
-  ({ title, children }, ref) => {
+  ({ title, children, button }, ref) => {
     return (
       <>
         {createPortal(
@@ -23,6 +25,11 @@ export const Popup = forwardRef<HTMLDivElement, Props>(
                 </div>
                 <div className={styles.content}>{children}</div>
               </div>
+              {button ? (
+                <Button className={styles.button} onClick={button.onClick}>
+                  <Text variant="button_primary">{button.text}</Text>
+                </Button>
+              ) : null}
             </div>
           </div>,
           document.body
@@ -32,4 +39,4 @@ export const Popup = forwardRef<HTMLDivElement, Props>(
   }
 );
 
-Popup.displayName = 'Popup';
+Popup.displayName = "Popup";

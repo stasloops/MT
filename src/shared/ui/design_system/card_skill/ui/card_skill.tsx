@@ -13,7 +13,7 @@ interface Props {
 export const CardSkill: FC<Props> = ({ item }) => {
   const [isDown, setIsDown] = useState(false);
   const activeSkin = card_skins.find(
-    ({ id }: { id: number }) => id === item.skin_id
+    ({ id }: { id: number }) => id === item.skinId
   );
 
   return (

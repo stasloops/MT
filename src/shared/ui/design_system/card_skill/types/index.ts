@@ -12,5 +12,5 @@ export interface ICardSkill {
   description: string;
   streak: number;
   createdAt: Date;
-  skin_id: number;
+  skinId: number;
 }

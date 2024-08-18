@@ -16,20 +16,26 @@ datasource db {
 }
 
 model User {
-  id                Int      @id @unique @default(autoincrement())
-  telegram_id       Int      @unique
-  telegram_username String   @unique
-  name              String   @default("")
+  id                Int             @id @unique @default(autoincrement())
+  telegram_id       Int             @unique
+  telegram_username String          @unique
+  name              String          @default("")
   avatar            String?
-  description       String   @default("")
-  balance           Int      @default(0)
-  streak            Int      @default(0)
+  description       String          @default("")
+  balance           Int             @default(0)
+  streak            Int             @default(0)
   tasks             Int[]
   skills            Skill[]
-  skills_limit      Int      @default(5)
-  debuffs           Int[]
-  debuffs_limit     Int      @default(5)
-  createdAt         DateTime @default(now())
+  skillCardSkins    SkillCardSkin[]
+  createdAt         DateTime        @default(now())
+}
+
+model SkillCardSkin {
+  id           Int  @id @default(autoincrement())
+  userId       Int
+  user         User @relation(fields: [userId], references: [id])
+  quantity     Int
+  quantityLeft Int
 }
 
 model Task {
@@ -55,9 +61,6 @@ model Skill {
   replay       Replay?
 }
 
-model SkillCardSkin {
-  id Int @id
-}
 
 enum Replay {
   ALL

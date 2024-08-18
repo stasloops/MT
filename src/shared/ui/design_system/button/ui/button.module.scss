@@ -1,7 +1,6 @@
 .wrapper {
   width: 207px;
 
-  box-sizing: border-box;
   border: 1px solid var(--primary_button_border);
   background-color: var(--primary_button_border);
   border-width: 2px 2px 4px 2px;
@@ -12,11 +11,10 @@
 .button {
   border-top: 2px solid #ffffff3c;
   border-bottom: 4px solid #5a0eb6;
-  background-color: var(--primary_button);
-
   border-radius: 6px;
 
-  padding: 16px 46px;
+  background-color: var(--primary_button);
+  padding: 12px 46px;
 
   text-align: center;
 }

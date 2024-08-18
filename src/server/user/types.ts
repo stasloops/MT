@@ -26,8 +26,12 @@ export interface IUser {
   streak: number;
   tasks: number[];
   skills?: ISkill[];
-  skills_limit: number;
-  debuffs: number[];
-  debuffs_limit: number;
+  // skillCardSkins: any[];
   createdAt: Date;
+}
+
+interface UserSkillCardSkin {
+  id: number;
+  quantity: number;
+  quantityLeft: number;
 }
