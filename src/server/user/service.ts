@@ -29,7 +29,7 @@ const create = async ({
   telegram_username = "",
   avatar,
   telegram_id,
-}: Partial<IUser>): Promise<User | null> => {
+}: Partial<IUser>): Promise<User | any> => {
   try {
     if (!telegram_id) {
       return null;
@@ -55,7 +55,7 @@ const create = async ({
     return newUser;
   } catch (err) {
     console.log(err);
-    return null;
+    return err;
   }
 };
 
