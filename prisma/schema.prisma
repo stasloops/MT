@@ -16,7 +16,8 @@ datasource db {
 }
 
 model User {
-  id                Int             @id @unique
+  id                Int             @id @default(autoincrement())
+  telegram_id       Int             @unique
   telegram_username String          @unique
   name              String          @default("")
   avatar            String?
@@ -33,7 +34,7 @@ model SkillCardSkin {
   id           Int  @id @default(autoincrement())
   skinId       Int
   userId       Int
-  user         User @relation(fields: [userId], references: [id])
+  user         User @relation(fields: [userId], references: [telegram_id])
   quantity     Int
   quantityLeft Int
 }
@@ -49,7 +50,7 @@ model Task {
 
 model Skill {
   id           Int       @id @default(autoincrement())
-  user         User?     @relation(fields: [userId], references: [id])
+  user         User?     @relation(fields: [userId], references: [telegram_id])
   userId       Int?
   skinId       Int
   title        String    @default("")

@@ -16,8 +16,8 @@ export const GET = async (req: Request, res: Response) => {
       );
     }
 
-    const id = validData?.data?.id;
-    const user = await userService.get(id);
+    const telegram_id = validData?.data?.telegram_id;
+    const user = await userService.get(telegram_id);
 
     return NextResponse.json({ user: user }, { status: 200 });
   } catch (err) {
@@ -30,8 +30,8 @@ export const GET = async (req: Request, res: Response) => {
 
 export const DELETE = async (req: Request, res: Response) => {
   try {
-    const { id } = await req.json();
-    userService.delete(id);
+    const { telegram_id } = await req.json();
+    userService.delete(telegram_id);
 
     return NextResponse.json(
       { message: "Удаление прошло успешно!" },

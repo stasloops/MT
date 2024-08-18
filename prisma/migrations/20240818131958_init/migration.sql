@@ -3,7 +3,8 @@ CREATE TYPE "Replay" AS ENUM ('ALL', 'WEEKDAYS', 'WEEKENDS', 'MONDAY', 'TUESDAY'
 
 -- CreateTable
 CREATE TABLE "User" (
-    "id" INTEGER NOT NULL,
+    "id" SERIAL NOT NULL,
+    "telegram_id" INTEGER NOT NULL,
     "telegram_username" TEXT NOT NULL,
     "name" TEXT NOT NULL DEFAULT '',
     "avatar" TEXT,
@@ -56,13 +57,13 @@ CREATE TABLE "Skill" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "User_id_key" ON "User"("id");
+CREATE UNIQUE INDEX "User_telegram_id_key" ON "User"("telegram_id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_telegram_username_key" ON "User"("telegram_username");
 
 -- AddForeignKey
-ALTER TABLE "SkillCardSkin" ADD CONSTRAINT "SkillCardSkin_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "SkillCardSkin" ADD CONSTRAINT "SkillCardSkin_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("telegram_id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Skill" ADD CONSTRAINT "Skill_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Skill" ADD CONSTRAINT "Skill_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("telegram_id") ON DELETE SET NULL ON UPDATE CASCADE;

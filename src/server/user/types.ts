@@ -17,6 +17,7 @@ import { ISkill } from "../skill/types";
 
 export interface IUser {
   id: number;
+  telegram_id: number;
   telegram_username: string;
   name: string;
   avatar?: string | null;

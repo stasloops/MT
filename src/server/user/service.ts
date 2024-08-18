@@ -2,10 +2,10 @@ import { SkillCardSkin, User } from "@prisma/client";
 import { prisma } from "../lib/prisma";
 import { IUser } from "./types";
 
-const get = async (id: number) => {
+const get = async (telegram_id: number) => {
   try {
     const user = await prisma.user.findUnique({
-      where: { id },
+      where: { telegram_id },
     });
 
     return user;
@@ -28,21 +28,21 @@ const create = async ({
   name,
   telegram_username = "",
   avatar,
-  id,
-}: Partial<IUser>): Promise<User | any> => {
+  telegram_id,
+}: Partial<User>): Promise<User | any> => {
   try {
-    if (!id) {
+    if (!telegram_id) {
       return null;
     }
 
-    const defaultSkillCardSkins: Omit<SkillCardSkin, 'id'>[] = [
-      { skinId: 1, quantity: 2, quantityLeft: 2, userId: id },
-      { skinId: 2, quantity: 2, quantityLeft: 2, userId: id },
+    const defaultSkillCardSkins: Omit<SkillCardSkin, "id">[] = [
+      { skinId: 1, quantity: 2, quantityLeft: 2, userId: telegram_id },
+      { skinId: 2, quantity: 2, quantityLeft: 2, userId: telegram_id },
     ];
 
     const newUser: User = await prisma.user.create({
       data: {
-        id: id,
+        telegram_id: telegram_id,
         telegram_username,
         name,
         avatar,
@@ -60,21 +60,21 @@ const create = async ({
 };
 
 const update = async (userData: Partial<IUser>) => {
-  const { id, skills, ...data } = userData;
+  const { telegram_id, skills, ...data } = userData;
 
   const newUser = await prisma.user.update({
-    where: { id },
+    where: { telegram_id },
     data: { ...data },
   });
 
   return newUser;
 };
 
-const remove = async (userId: number) => {
+const remove = async (telegram_id: number) => {
   try {
     await prisma.user.delete({
       where: {
-        id: userId,
+        id: telegram_id,
       },
     });
   } catch (err) {

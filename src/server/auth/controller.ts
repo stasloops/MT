@@ -7,9 +7,9 @@ import { IUser } from "../user/types";
 export const POST = async (req: Request, res: Response) => {
   try {
     const telegramUserData = await req.json();
-    const { id, first_name, username, photo_url } = telegramUserData;
+    const { id: telegram_id, first_name, username, photo_url } = telegramUserData;
     const user_data: Partial<IUser> = {
-      id: id,
+      telegram_id: telegram_id,
       name: first_name,
       telegram_username: username,
       avatar: photo_url,
@@ -21,7 +21,7 @@ export const POST = async (req: Request, res: Response) => {
     );
 
     if (isValid) {
-      let user: IUser | null = await userService.get(id);
+      let user: IUser | null = await userService.get(telegram_id);
       if (!user) {
         user = await userService.create(user_data);
       } else {
@@ -29,7 +29,7 @@ export const POST = async (req: Request, res: Response) => {
       }
 
       const token = authService.signToken({
-        id: id,
+        telegram_id: telegram_id,
       });
       cookies().set({
         name: "Authorization",
