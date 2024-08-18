@@ -1,3 +1,4 @@
+import { SkillCardSkin, User } from "@prisma/client";
 import { prisma } from "../lib/prisma";
 import { IUser } from "./types";
 
@@ -28,24 +29,26 @@ const create = async ({
   telegram_username = "",
   avatar,
   telegram_id,
-}: Partial<IUser>): Promise<IUser | null> => {
+}: Partial<IUser>): Promise<User | null> => {
   try {
     if (!telegram_id) {
       return null;
     }
 
-    const skillCardSkins: any = [
+    const defaultSkillCardSkins: SkillCardSkin[] = [
       { id: 1, quantity: 2, quantityLeft: 2, userId: telegram_id },
       { id: 2, quantity: 2, quantityLeft: 2, userId: telegram_id },
     ];
 
-    const newUser: IUser = await prisma.user.create({
+    const newUser: User = await prisma.user.create({
       data: {
         telegram_username,
         name,
         avatar,
         telegram_id,
-        skillCardSkins,
+        skillCardSkins: {
+          create: defaultSkillCardSkins,
+        },
       },
     });
 
