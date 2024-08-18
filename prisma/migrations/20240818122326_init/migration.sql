@@ -19,7 +19,7 @@ CREATE TABLE "User" (
 
 -- CreateTable
 CREATE TABLE "SkillCardSkin" (
-    "id" SERIAL NOT NULL,
+    "id" INTEGER NOT NULL,
     "userId" INTEGER NOT NULL,
     "quantity" INTEGER NOT NULL,
     "quantityLeft" INTEGER NOT NULL,
