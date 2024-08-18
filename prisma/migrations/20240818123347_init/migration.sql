@@ -3,8 +3,7 @@ CREATE TYPE "Replay" AS ENUM ('ALL', 'WEEKDAYS', 'WEEKENDS', 'MONDAY', 'TUESDAY'
 
 -- CreateTable
 CREATE TABLE "User" (
-    "id" SERIAL NOT NULL,
-    "telegram_id" INTEGER NOT NULL,
+    "id" INTEGER NOT NULL,
     "telegram_username" TEXT NOT NULL,
     "name" TEXT NOT NULL DEFAULT '',
     "avatar" TEXT,
@@ -57,9 +56,6 @@ CREATE TABLE "Skill" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_id_key" ON "User"("id");
-
--- CreateIndex
-CREATE UNIQUE INDEX "User_telegram_id_key" ON "User"("telegram_id");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_telegram_username_key" ON "User"("telegram_username");

@@ -8,7 +8,7 @@ const getUserId = () => {
   let token = cookies().get("Authorization")?.value;
   const validData: VerifyToken = authService.verifyToken(String(token));
 
-  return validData?.data?.telegram_id;
+  return validData?.data?.id;
 };
 
 export const GET = async (req: Request, res: Response) => {

@@ -9,7 +9,7 @@ export const POST = async (req: Request, res: Response) => {
     const telegramUserData = await req.json();
     const { id, first_name, username, photo_url } = telegramUserData;
     const user_data: Partial<IUser> = {
-      telegram_id: id,
+      id: id,
       name: first_name,
       telegram_username: username,
       avatar: photo_url,
@@ -29,7 +29,7 @@ export const POST = async (req: Request, res: Response) => {
       }
 
       const token = authService.signToken({
-        telegram_id: id,
+        id: id,
       });
       cookies().set({
         name: "Authorization",
