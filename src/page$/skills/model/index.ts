@@ -1,5 +1,6 @@
 import { createEffect, restore, sample } from "effector";
 import { addSkill, getSkills } from "./api";
+import { ISkill } from "@/server/skill/types";
 
 const fetchSkillsFx = createEffect(getSkills);
 

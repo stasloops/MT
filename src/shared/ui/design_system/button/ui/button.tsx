@@ -6,7 +6,7 @@ import clsx from "clsx";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
-  className: string;
+  className?: string;
 }
 export const Button: FC<Props> = ({ children, className, ...rest }) => {
   return (

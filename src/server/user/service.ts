@@ -34,12 +34,18 @@ const create = async ({
       return null;
     }
 
+    const skillCardSkins: any = [
+      { id: 1, quantity: 2, quantityLeft: 2, userId: telegram_id },
+      { id: 2, quantity: 2, quantityLeft: 2, userId: telegram_id },
+    ];
+
     const newUser: IUser = await prisma.user.create({
       data: {
         telegram_username,
         name,
         avatar,
         telegram_id,
+        skillCardSkins,
       },
     });
 
