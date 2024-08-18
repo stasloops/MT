@@ -4,9 +4,13 @@ import { IUser } from "./types";
 
 const get = async (telegram_id: number) => {
   try {
-    const user = await prisma.user.findUnique({
+    console.log('telegram_id: ', telegram_id);
+    
+    const user = await prisma.user.findMany({
       where: { telegram_id },
     });
+    console.log('user: ', user);
+    
 
     return user;
   } catch (err) {

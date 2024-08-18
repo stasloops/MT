@@ -21,7 +21,7 @@ export const POST = async (req: Request, res: Response) => {
     );
 
     if (isValid) {
-      let user: IUser | null = await userService.get(telegram_id);
+      let user: IUser | any = await userService.get(telegram_id);
       if (!user) {
         user = await userService.create(user_data);
       } else {
