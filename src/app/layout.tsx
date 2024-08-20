@@ -24,14 +24,16 @@ export const metadata: Metadata = {
   },
   icons: [
     {
-      rel: "apple-touch-icon",
-      url: "/assets/pwa/apple-icon-192x192.png",
-      sizes: "192x192",
+      rel: "icon",
+      sizes: "144x144",
+      type: "image/ico",
+      url: "/favicon.ico",
     },
     {
-      rel: "apple-touch-icon",
-      url: "/assets/pwa/apple-icon-512x512.png",
-      sizes: "512x512",
+      rel: "icon",
+      sizes: "144x144",
+      type: "image/png",
+      url: "/favicon.png",
     },
   ],
 };

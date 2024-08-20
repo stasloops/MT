@@ -12,12 +12,12 @@ import { userModel } from "@/shared/model/user";
 import Image from "next/image";
 import { card_skins, CardSkill, ICardSkill } from "@/entities/card_skill";
 
-
 export const Skills = () => {
   const isClient = useIsClient();
   const { ref, isOpen, setIsOpen } = usePopup();
-  const [skills, addSkill] = useUnit([
+  const [skills, fetchSkills, addSkill] = useUnit([
     skills_model.$skills,
+    skills_model.fetchSkillsFx,
     skills_model.addSkillFx,
   ]);
   const [user] = useUnit([userModel.$user]);
@@ -42,6 +42,10 @@ export const Skills = () => {
     setIsOpen(false);
     setActiveCardId(null);
   };
+
+  useEffect(() => {
+    fetchSkills();
+  }, []);
 
   useEffect(() => {
     if (isOpen) {
