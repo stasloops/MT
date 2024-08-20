@@ -31,23 +31,24 @@ export const CardSkill: FC<Props> = ({ item }) => {
         src={activeSkin?.front || ""}
         alt="card"
       />
-      <div className={styles.fire}>
-        <div className={styles.fire_container}>
-          <Image className={styles.fire_icon} src={fire} alt="fire" />
-          <Text
-            className={styles.fire_count}
-            textAlign="center"
-            variant="numeration"
-          >
-            {item.streak}
-          </Text>
+      
+      {item.streak ? (
+        <div className={styles.fire}>
+          <div className={styles.fire_container}>
+            <Image className={styles.fire_icon} src={fire} alt="fire" />
+            <Text
+              className={styles.fire_count}
+              textAlign="center"
+              variant="numeration"
+            >
+              {item.streak}
+            </Text>
+          </div>
         </div>
-      </div>
+      ) : null}
 
       <div className={styles.container}>
-        <Text textAlign="center" variant="h3">
-          {item.title}
-        </Text>
+        <Text variant="h3">{item.title}</Text>
         <Text className={styles.description} variant="description">
           {item.description}
         </Text>

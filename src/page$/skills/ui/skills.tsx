@@ -1,5 +1,5 @@
 import { Text } from "@/shared/ui/design_system/text";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./skills.module.scss";
 import { useUnit } from "effector-react";
 import { skills_model } from "../model";
@@ -12,10 +12,14 @@ import { userModel } from "@/shared/model/user";
 import Image from "next/image";
 import { card_skins, CardSkill, ICardSkill } from "@/entities/card_skill";
 
+
 export const Skills = () => {
   const isClient = useIsClient();
   const { ref, isOpen, setIsOpen } = usePopup();
-  const [skills] = useUnit([skills_model.$skills]);
+  const [skills, addSkill] = useUnit([
+    skills_model.$skills,
+    skills_model.addSkillFx,
+  ]);
   const [user] = useUnit([userModel.$user]);
   const skillCardSkins = user?.skillCardSkins;
   const [activeTab] = useUnit([bottom_menu_model.$activeTab]);
@@ -27,6 +31,25 @@ export const Skills = () => {
     }
     setActiveCardId(id);
   };
+
+  const createSkill = async () => {
+    const skinId = skillCardSkins?.find(
+      (item) => item.id === activeCardId
+    )?.skinId;
+
+    await addSkill(skinId || 0);
+
+    setIsOpen(false);
+    setActiveCardId(null);
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      return;
+    }
+    setActiveCardId(null);
+  }, [isOpen]);
+
   return (
     <>
       <div className={styles.wrapper}>
@@ -61,7 +84,7 @@ export const Skills = () => {
           title="Выбери карту скилла"
           button={{
             text: "Подтвердить",
-            onClick: () => console.log("log"),
+            onClick: createSkill,
             isDisabled: activeCardId ? false : true,
           }}
           ref={ref}
@@ -86,9 +109,7 @@ export const Skills = () => {
                   </div>
 
                   <div className={styles.popup_item_label}>
-                    <Text variant="h3">
-                      {isActive ? "Выбранно" : "Выбрать"}
-                    </Text>
+                    <Text variant="h3">{isActive ? "Выбрано" : "Выбрать"}</Text>
                   </div>
                 </div>
               );

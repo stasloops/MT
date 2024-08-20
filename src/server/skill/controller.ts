@@ -54,7 +54,7 @@ export const POST = async (req: Request, res: Response) => {
     }
 
     const skill = await prisma.skill.create({
-      data: { userId: telegram_id, skinId: skin_id },
+      data: { userId: telegram_id, skinId: skin_id, title: 'Название' },
     });
 
     return NextResponse.json(skill, { status: 200 });
