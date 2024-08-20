@@ -4,18 +4,13 @@ import { IUser } from "./types";
 
 const get = async (telegram_id: number) => {
   try {
-    console.log('telegram_id: ', telegram_id);
-    
-    const user = await prisma.user.findMany({
+    const user = await prisma.user.findFirst({
       where: { telegram_id },
     });
-    console.log('user: ', user);
-    
 
     return user;
   } catch (err) {
-    console.log(err);
-    return null;
+    throw err;
   }
 };
 
@@ -59,7 +54,7 @@ const create = async ({
     return newUser;
   } catch (err) {
     console.log(err);
-    return err;
+    throw err;
   }
 };
 
@@ -86,10 +81,23 @@ const remove = async (telegram_id: number) => {
   }
 };
 
+const getSkillCardSkins = async (telegram_id: number) => {
+  try {
+    const skillCardSkins = await prisma.skillCardSkin.findMany({
+      where: { userId: telegram_id },
+    });
+
+    return skillCardSkins;
+  } catch (err) {
+    throw err;
+  }
+};
+
 export const userService = {
   get,
   getAll,
   update,
   create,
   delete: remove,
+  getSkillCardSkins,
 };

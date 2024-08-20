@@ -1,18 +1,3 @@
-// export interface IUser {
-//   id: number;
-//   telegram_id: number;
-//   name: string;
-//   telegram_username: string
-//   avatar: string | null;
-//   description: string;
-//   balance: number;
-//   streak: number;
-//   tasks: number[];
-//   skills?: ISkill[];
-//   debuffs: number[];
-//   createdAt: Date;
-// }
-
 import { ISkill } from "../skill/types";
 
 export interface IUser {
@@ -26,12 +11,14 @@ export interface IUser {
   streak: number;
   tasks: number[];
   skills?: ISkill[];
-  // skillCardSkins: any[];
+  skillCardSkins: UserSkillCardSkin[];
   createdAt: Date;
 }
 
 interface UserSkillCardSkin {
   id: number;
+  skinId: number;
+  userId: number;
   quantity: number;
   quantityLeft: number;
 }

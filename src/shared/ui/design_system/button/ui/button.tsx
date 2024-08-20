@@ -1,16 +1,28 @@
 "use client";
 
-import React, { ButtonHTMLAttributes, FC, useState } from "react";
+import React, { ButtonHTMLAttributes, FC } from "react";
 import styles from "./button.module.scss";
 import clsx from "clsx";
 
-interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
+  isDisabled?: boolean;
   className?: string;
 }
-export const Button: FC<Props> = ({ children, className, ...rest }) => {
+export const Button: FC<ButtonProps> = ({
+  children,
+  className,
+  isDisabled,
+  ...rest
+}) => {
+  console.log(isDisabled);
+  
   return (
-    <button className={clsx(styles.wrapper, className)} {...rest}>
+    <button
+      disabled={isDisabled}
+      className={clsx(styles.wrapper, isDisabled && styles.disabled, className)}
+      {...rest}
+    >
       <div>
         <div className={styles.button}>{children}</div>
       </div>

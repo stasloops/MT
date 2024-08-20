@@ -9,16 +9,19 @@
   padding: 0 18px;
 
   z-index: 100;
+
+  display: flex;
+  align-items: center;
 }
 
 .background {
   position: fixed;
-  top: -10px;
-  left: -10px;
+  top: -9vh;
+  left: -9vw;
   z-index: 100;
 
-  width: 104vw;
-  height: 104vh;
+  width: 110vw;
+  height: 110vh;
 
   background-color: #000000ab;
   filter: blur(4px);
@@ -29,7 +32,6 @@
   z-index: 101;
 
   width: 100%;
-  height: 100%;
 
   display: flex;
   flex-direction: column;

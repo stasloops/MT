@@ -1,10 +1,12 @@
+"use client";
+
 import React, { FC, useState } from "react";
 import styles from "./card_skill.module.scss";
 import { ICardSkill } from "../types";
 import Image from "next/image";
 import { card_skins } from "../config";
-import { Text } from "../../text";
 import fire from "../assets/fire.png";
+import { Text } from "@/shared/ui/design_system";
 
 interface Props {
   item: ICardSkill;

@@ -4,11 +4,15 @@ import React, { forwardRef } from "react";
 import styles from "./popup.module.scss";
 import { Text } from "../../text";
 import { createPortal } from "react-dom";
-import { Button } from "../../button";
+import { Button, ButtonProps } from "../../button";
+
+interface Button extends Omit<ButtonProps, "children"> {
+  text: string;
+}
 
 interface Props {
   title: string;
-  button?: { text: string; onClick: () => void };
+  button?: Button;
   children: React.ReactNode;
 }
 export const Popup = forwardRef<HTMLDivElement, Props>(
@@ -18,15 +22,15 @@ export const Popup = forwardRef<HTMLDivElement, Props>(
         {createPortal(
           <div className={styles.wrapper}>
             <div className={styles.background}></div>
-            <div className={styles.centering}>
-              <div ref={ref} className={styles.popup}>
+            <div ref={ref} className={styles.centering}>
+              <div className={styles.popup}>
                 <div className={styles.head}>
                   <Text variant="h2">{title}</Text>
                 </div>
                 <div className={styles.content}>{children}</div>
               </div>
               {button ? (
-                <Button className={styles.button} onClick={button.onClick}>
+                <Button className={styles.button} {...button}>
                   <Text variant="button_primary">{button.text}</Text>
                 </Button>
               ) : null}

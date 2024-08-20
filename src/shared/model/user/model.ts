@@ -1,6 +1,6 @@
-import { IUser } from "../../../server/user/types";
 import { createEffect, restore, sample } from "effector";
 import { getUser } from "./api";
+import { IUser } from "@/server/user/types";
 
 const fetchUserFx = createEffect(getUser);
 

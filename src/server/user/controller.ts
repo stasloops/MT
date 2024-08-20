@@ -17,9 +17,15 @@ export const GET = async (req: Request, res: Response) => {
     }
 
     const telegram_id = validData?.data?.telegram_id;
+
     const user = await userService.get(telegram_id);
 
-    return NextResponse.json({ user: user }, { status: 200 });
+    const skillCardSkins = await userService.getSkillCardSkins(telegram_id);
+
+    return NextResponse.json(
+      { user: { ...user, skillCardSkins } },
+      { status: 200 }
+    );
   } catch (err) {
     return NextResponse.json(
       { message: "Не валидный токен!" },
