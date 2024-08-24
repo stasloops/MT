@@ -54,7 +54,7 @@ export const POST = async (req: Request, res: Response) => {
     }
 
     const skill = await prisma.skill.create({
-      data: { userId: telegram_id, skinId: skin_id, title: 'Название' },
+      data: { userId: telegram_id, skinId: skin_id, title: "Название" },
     });
 
     return NextResponse.json(skill, { status: 200 });
@@ -89,10 +89,10 @@ export const PUT = async (req: Request, res: Response) => {
 };
 
 export const DELETE = async (req: Request, res: Response) => {
-  try {
-    const { id } = await req.json();
-    const telegram_id = getUserId();
+  const telegram_id = getUserId();
+  const id = Number(req.url.split("?")[1].replace("id=", ""));
 
+  try {
     const skill = await prisma.skill.findUnique({
       where: { id: id },
     });
@@ -113,6 +113,6 @@ export const DELETE = async (req: Request, res: Response) => {
       { status: 200 }
     );
   } catch (e) {
-    return NextResponse.json({ error: e }, { status: 500 });
+    return NextResponse.json({ error: e, message: id }, { status: 500 });
   }
 };

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { FC, useState } from "react";
+import React, { FC } from "react";
 import styles from "./card_skill.module.scss";
 import { ICardSkill } from "../types";
 import Image from "next/image";
@@ -10,28 +10,23 @@ import { Text } from "@/shared/ui/design_system";
 
 interface Props {
   item: ICardSkill;
+  onClick?: () => void;
 }
 
-export const CardSkill: FC<Props> = ({ item }) => {
-  const [isDown, setIsDown] = useState(false);
+export const CardSkill: FC<Props> = ({ item, onClick }) => {
   const activeSkin = card_skins.find(
     ({ id }: { id: number }) => id === item.skinId
   );
 
   return (
-    <div
-      style={{ transform: isDown ? "scale(1.05)" : "", transition: "0.3s" }}
-      className={styles.wrapper}
-      onPointerDown={() => setIsDown(true)}
-      onPointerUp={() => setIsDown(false)}
-    >
+    <div className={styles.wrapper} onClick={onClick}>
       <Image
         unoptimized={true}
         className={styles.front_bg}
         src={activeSkin?.front || ""}
         alt="card"
       />
-      
+
       {item.streak ? (
         <div className={styles.fire}>
           <div className={styles.fire_container}>

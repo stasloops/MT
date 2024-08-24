@@ -11,19 +11,22 @@ import { useIsClient, usePopup } from "@/shared/lib";
 import { userModel } from "@/shared/model/user";
 import Image from "next/image";
 import { card_skins, CardSkill, ICardSkill } from "@/entities/card_skill";
+import { List } from "./list";
 
 export const Skills = () => {
   const isClient = useIsClient();
   const { ref, isOpen, setIsOpen } = usePopup();
-  const [skills, fetchSkills, addSkill] = useUnit([
+  const [skills, fetchSkills, removeSkill, addSkill] = useUnit([
     skills_model.$skills,
     skills_model.fetchSkillsFx,
+    skills_model.removeSkillFx,
     skills_model.addSkillFx,
   ]);
   const [user] = useUnit([userModel.$user]);
-  const skillCardSkins = user?.skillCardSkins;
   const [activeTab] = useUnit([bottom_menu_model.$activeTab]);
   const [activeCardId, setActiveCardId] = useState<number | null>(null);
+
+  const skillCardSkins = user?.skillCardSkins;
 
   const handleActiveCard = (id: number) => {
     if (id === activeCardId) {
@@ -54,6 +57,9 @@ export const Skills = () => {
     setActiveCardId(null);
   }, [isOpen]);
 
+  const deleteSkill = async (id: number) => {
+    await removeSkill(id);
+  };
   return (
     <>
       <div className={styles.wrapper}>
@@ -61,13 +67,15 @@ export const Skills = () => {
           Навыки
         </Text>
 
-        <div className={styles.skills_container}>
-          <div className={styles.skills}>
-            {skills.map((item: ICardSkill) => {
-              return <CardSkill key={item.id} item={item} />;
-            })}
-          </div>
-        </div>
+        <List
+          itemsData={skills}
+          listItem={(item: ICardSkill) => (
+            <CardSkill onClick={() => deleteSkill(item.id)} item={item} />
+          )}
+          ITEM_WIDTH={162}
+          ITEM_HEIGHT={214}
+          GAP={15}
+        />
 
         {isClient
           ? createPortal(

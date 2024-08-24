@@ -1,6 +1,8 @@
 .wrapper {
   position: relative;
   text-align: center;
+  width: 100%;
+
 }
 
 .skills {
@@ -8,6 +10,7 @@
   padding-bottom: calc(16px + var(--bottom-menu-width));
 
   display: flex;
+  
   flex-wrap: wrap;
 
   gap: 16px;
