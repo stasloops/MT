@@ -11,6 +11,8 @@ export const addSkill = async (skin_id: number) => {
 };
 
 export const removeSkill = async (id: number) => {
-  await axios.delete(`/api/skill?id=${id}`);
-  return id;
+  const { data } = await axios.delete(`/api/skill?id=${id}`);
+  return { id, skinId: data.skinId };
 };
+
+export const api = { getSkills, addSkill, removeSkill };

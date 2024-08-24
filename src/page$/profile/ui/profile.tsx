@@ -1,4 +1,4 @@
-import { userModel } from "@/shared/model/user";
+import { user_model } from "@/shared/model/user";
 import { Text } from "@/shared/ui/design_system/text";
 import { LoginButton } from "@telegram-auth/react";
 import axios from "axios";
@@ -7,7 +7,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
 export const Profile = () => {
-  const [user, fetchUser] = useUnit([userModel.$user, userModel.fetchUserFx]);
+  const [user, fetchUser] = useUnit([user_model.$user, user_model.fetchUserFx]);
 
   const auth = async (data: any) => {
     await axios.post("/api/auth", data);

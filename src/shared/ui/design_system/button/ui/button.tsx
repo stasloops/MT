@@ -15,8 +15,6 @@ export const Button: FC<ButtonProps> = ({
   isDisabled,
   ...rest
 }) => {
-  console.log(isDisabled);
-  
   return (
     <button
       disabled={isDisabled}
