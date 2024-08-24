@@ -21,5 +21,9 @@
 
 .disabled {
   pointer-events: none;
-  background-color: #5E3194;
+  background-color: #5e3194 !important;
+
+  &_text {
+    opacity: 0.5;
+  }
 }

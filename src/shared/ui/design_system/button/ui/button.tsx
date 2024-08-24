@@ -18,11 +18,15 @@ export const Button: FC<ButtonProps> = ({
   return (
     <button
       disabled={isDisabled}
-      className={clsx(styles.wrapper, isDisabled && styles.disabled, className)}
+      className={clsx(styles.wrapper, className)}
       {...rest}
     >
       <div>
-        <div className={styles.button}>{children}</div>
+        <div className={clsx(isDisabled && styles.disabled, styles.button)}>
+          <span className={clsx(isDisabled && styles.disabled_text)}>
+            {children}
+          </span>
+        </div>
       </div>
     </button>
   );

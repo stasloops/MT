@@ -1,7 +1,6 @@
-import { usePopup } from "@/shared/lib";
 import { Popup, Text } from "@/shared/ui/design_system";
 import Image from "next/image";
-import React, { FC, forwardRef, useEffect, useState } from "react";
+import React, { forwardRef, useEffect, useState } from "react";
 import { skills_model } from "../model";
 import { useUnit } from "effector-react";
 import { card_skins } from "@/entities/card_skill";
@@ -89,4 +88,4 @@ export const SkillsPopup = forwardRef<HTMLDivElement, Props>(
   }
 );
 
-Popup.displayName = "Popup";
+SkillsPopup.displayName = "SkillsPopup";
