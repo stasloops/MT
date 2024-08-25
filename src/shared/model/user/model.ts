@@ -1,10 +1,18 @@
-import { createEffect, createEvent, restore, sample } from "effector";
+import {
+  createEffect,
+  createEvent,
+  createStore,
+  restore,
+  sample,
+} from "effector";
 import { getUser } from "./api";
 import { IUser } from "@/server/user/types";
 
 const fetchUserFx = createEffect(getUser);
 
 const $user = restore<IUser | null>(fetchUserFx, null);
+
+const $isLoading = createStore(true);
 
 const updateUser = createEvent<Partial<IUser>>();
 
@@ -71,10 +79,18 @@ sample({
   target: $user,
 });
 
+sample({
+  clock: fetchUserFx,
+  fn: () => false,
+  target: $isLoading,
+});
+
 export const user_model = {
   $user,
+  $isLoading,
   fetchUserFx,
   updateUser,
+
   decrementSkillCardSkinsQuantityLeft,
   incrementSkillCardSkinQuantityLeft,
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { BottomMenu, Header, Popup } from "@/shared/ui/design_system";
 import { BookIcon, ChestIcon, MirrorIcon, WheelIcon } from "@/shared/ui/icons";
 import styles from "./page.module.scss";
@@ -15,23 +15,20 @@ import axios from "axios";
 import Loading from "./loading";
 
 const LazyLayout = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [user, fetchUser] = useUnit([user_model.$user, user_model.fetchUserFx]);
+  const [user, isLoading, fetchUser] = useUnit([
+    user_model.$user,
+    user_model.$isLoading,
+    user_model.fetchUserFx,
+  ]);
 
-  useEffect(() => {
-    try {
-      setIsLoading(true);
-      fetchUser();
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setIsLoading(false);
-    }
+  useLayoutEffect(() => {
+    fetchUser();
   }, []);
 
   if (isLoading) {
     return <Loading />;
   }
+
   if (!user) {
     const auth = async (data: any) => {
       await axios.post("/api/auth", data);
@@ -44,7 +41,6 @@ const LazyLayout = () => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            height: "30vh",
           }}
         >
           <LoginButton
