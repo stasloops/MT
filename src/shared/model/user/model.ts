@@ -80,7 +80,7 @@ sample({
 });
 
 sample({
-  clock: fetchUserFx,
+  clock: fetchUserFx.finally,
   fn: () => false,
   target: $isLoading,
 });

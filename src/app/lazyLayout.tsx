@@ -15,7 +15,6 @@ import axios from "axios";
 import Loading from "./loading";
 
 const LazyLayout = () => {
-  const [insideLoading, setInsideLoading] = useState(true);
   const [user, isLoading, fetchUser] = useUnit([
     user_model.$user,
     user_model.$isLoading,
@@ -26,19 +25,11 @@ const LazyLayout = () => {
     fetchUser();
   }, []);
 
-  useEffect(() => {
-    if (!isLoading) {
-      setTimeout(() => {
-        setInsideLoading(false);
-      },1000);
-    }
-  }, [isLoading]);
-
-  if (insideLoading) {
+  if (isLoading) {
     return <Loading />;
   }
 
-  if (!user && !insideLoading) {
+  if (!user && !isLoading) {
     const auth = async (data: any) => {
       await axios.post("/api/auth", data);
       await fetchUser();
