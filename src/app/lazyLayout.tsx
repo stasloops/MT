@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BottomMenu, Header, Popup } from "@/shared/ui/design_system";
 import { BookIcon, ChestIcon, MirrorIcon, WheelIcon } from "@/shared/ui/icons";
 import styles from "./page.module.scss";
@@ -16,6 +16,10 @@ import axios from "axios";
 const LazyLayout = () => {
   const [user, fetchUser] = useUnit([user_model.$user, user_model.fetchUserFx]);
 
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
   if (!user) {
     const auth = async (data: any) => {
       await axios.post("/api/auth", data);
@@ -23,6 +27,14 @@ const LazyLayout = () => {
     };
     return (
       <Popup title="Вход">
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: '50vh'
+          }}
+        ></div>
         <LoginButton
           botUsername={process.env.BOT_USERNAME || "magic_tasks_auth_bot"}
           onAuthCallback={auth}
