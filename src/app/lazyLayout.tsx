@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { BottomMenu, Header, Popup } from "@/shared/ui/design_system";
 import { BookIcon, ChestIcon, MirrorIcon, WheelIcon } from "@/shared/ui/icons";
 import styles from "./page.module.scss";
@@ -12,14 +12,26 @@ import { user_model } from "@/shared/model/user";
 import { useUnit } from "effector-react";
 import { LoginButton } from "@telegram-auth/react";
 import axios from "axios";
+import Loading from "./loading";
 
 const LazyLayout = () => {
+  const [isLoading, setIsLoading] = useState(true);
   const [user, fetchUser] = useUnit([user_model.$user, user_model.fetchUserFx]);
 
   useEffect(() => {
-    fetchUser();
+    try {
+      setIsLoading(true);
+      fetchUser();
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
   }, []);
 
+  if (isLoading) {
+    return <Loading />;
+  }
   if (!user) {
     const auth = async (data: any) => {
       await axios.post("/api/auth", data);
@@ -32,17 +44,18 @@ const LazyLayout = () => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            height: '50vh'
+            height: "30vh",
           }}
-        ></div>
-        <LoginButton
-          botUsername={process.env.BOT_USERNAME || "magic_tasks_auth_bot"}
-          onAuthCallback={auth}
-          buttonSize="large"
-          cornerRadius={5}
-          showAvatar={true}
-          lang="ru"
-        />
+        >
+          <LoginButton
+            botUsername={process.env.BOT_USERNAME || "magic_tasks_auth_bot"}
+            onAuthCallback={auth}
+            buttonSize="large"
+            cornerRadius={5}
+            showAvatar={true}
+            lang="ru"
+          />
+        </div>
       </Popup>
     );
   }
