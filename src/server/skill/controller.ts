@@ -53,23 +53,18 @@ export const POST = async (req: Request, res: Response) => {
       );
     }
 
-    const skillCardSkin = await prisma.skillCardSkin.findMany({
-      where: { skinId: skin_id, userId: telegram_id },
+    const quantityLeft = await updateSkinQuantityLeft({
+      userId: telegram_id,
+      skinId: skin_id,
+      type: "decrement",
     });
 
-    const decrementQuantityLeft = skillCardSkin[0].quantityLeft - 1;
-
-    if (decrementQuantityLeft < 0) {
+    if (quantityLeft < 0) {
       return NextResponse.json(
         { message: "Недостаточно карт" },
         { status: 400 }
       );
     }
-
-    await prisma.skillCardSkin.updateMany({
-      where: { skinId: skin_id, userId: telegram_id },
-      data: { quantityLeft: decrementQuantityLeft },
-    });
 
     const skill = await prisma.skill.create({
       data: { userId: telegram_id, skinId: skin_id, title: "Название" },
@@ -111,34 +106,68 @@ export const DELETE = async (req: Request, res: Response) => {
   const id = Number(req.url.split("?")[1].replace("id=", ""));
 
   try {
-    const skill = await prisma.skill.findUnique({
-      where: { id: id },
+    const deletedSkill = await prisma.skill.delete({
+      where: { id: id, userId: telegram_id },
     });
 
-    if (!telegram_id || skill?.userId !== telegram_id) {
-      return NextResponse.json(
-        { message: "Не валидный токен!" },
-        { status: 401 }
-      );
+    if (!deletedSkill) {
+      return NextResponse.json({ message: "Навык не найден" }, { status: 400 });
     }
 
-    const deletedSkill = await prisma.skill.delete({
-      where: { id: id },
+    const quantityLeft = await updateSkinQuantityLeft({
+      userId: telegram_id,
+      skinId: deletedSkill.skinId,
+      type: "increment",
     });
-
-    const skillCardSkin = await prisma.skillCardSkin.findMany({
-      where: { skinId: deletedSkill?.skinId, userId: telegram_id },
-    });
-
-    const incrementQuantityLeft = skillCardSkin[0].quantityLeft + 1;
-
-    await prisma.skillCardSkin.updateMany({
-      where: { skinId: deletedSkill?.skinId, userId: telegram_id },
-      data: { quantityLeft: incrementQuantityLeft },
-    });
+    if (quantityLeft < 0) {
+      return NextResponse.json(
+        { message: "Недостаточно карт" },
+        { status: 400 }
+      );
+    }
 
     return NextResponse.json({ ...deletedSkill }, { status: 200 });
   } catch (e) {
     return NextResponse.json({ error: e, message: id }, { status: 500 });
   }
+};
+
+const updateSkinQuantityLeft = async ({
+  userId,
+  skinId,
+  type,
+}: {
+  userId: number;
+  skinId: number;
+  type: "increment" | "decrement";
+}) => {
+  const skills = await prisma.skill.findMany({ where: { userId } });
+  const filteredSkillsBySkinId = skills.filter((i) => i.skinId === skinId);
+
+  const skillCardSkins = await prisma.skillCardSkin.findMany({
+    where: { skinId, userId },
+  });
+  const skillCardSkin = skillCardSkins[0];
+
+  if (!skillCardSkin) {
+    return 0; // Обработка случая, когда skillCardSkin не найден
+  }
+
+  const newQuantityLeft =
+    type === "decrement"
+      ? skillCardSkin.quantity - filteredSkillsBySkinId.length - 1
+      : skillCardSkin.quantity - filteredSkillsBySkinId.length;
+
+  if (newQuantityLeft < 0) {
+    return newQuantityLeft;
+  }
+
+  await prisma.skillCardSkin.updateMany({
+    where: { skinId, userId },
+    data: {
+      quantityLeft: newQuantityLeft,
+    },
+  });
+
+  return newQuantityLeft;
 };

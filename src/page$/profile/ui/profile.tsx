@@ -9,11 +9,6 @@ import React, { useEffect, useState } from "react";
 export const Profile = () => {
   const [user, fetchUser] = useUnit([user_model.$user, user_model.fetchUserFx]);
 
-  const auth = async (data: any) => {
-    await axios.post("/api/auth", data);
-    await fetchUser();
-  };
-
   useEffect(() => {
     fetchUser();
   }, []);
@@ -36,16 +31,7 @@ export const Profile = () => {
             />
             <div>{user?.name}</div>
           </div>
-        ) : (
-          <LoginButton
-            botUsername={process.env.BOT_USERNAME || "magic_tasks_auth_bot"}
-            onAuthCallback={auth}
-            buttonSize="large"
-            cornerRadius={5}
-            showAvatar={true}
-            lang="ru"
-          />
-        )}
+        ) : null}
         <InstallButton />
       </div>
     </div>
