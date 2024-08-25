@@ -29,7 +29,7 @@ const LazyLayout = () => {
     return <Loading />;
   }
 
-  if (!user) {
+  if (!user && !isLoading) {
     const auth = async (data: any) => {
       await axios.post("/api/auth", data);
       await fetchUser();
