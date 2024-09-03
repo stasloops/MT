@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { prisma } from "../lib/prisma";
 import { cookies } from "next/headers";
 import { authService, VerifyToken } from "../auth/service";
-import { card_skins } from "@/entities/card_skill";
+import { card_skins } from "@/entities/skill";
 
 const getUserId = () => {
   let token = cookies().get("Authorization")?.value;

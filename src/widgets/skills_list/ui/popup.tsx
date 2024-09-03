@@ -1,11 +1,10 @@
 import { Popup, Text } from "@/shared/ui/design_system";
 import Image from "next/image";
 import React, { forwardRef, useEffect, useState } from "react";
-import { skills_model } from "../model";
 import { useUnit } from "effector-react";
-import { card_skins } from "@/entities/card_skill";
-import styles from "./skills.module.scss";
+import styles from "./skills_list.module.scss";
 import { user_model } from "@/shared/model/user";
+import { card_skins, skills_model } from "@/entities/skill";
 
 interface Props {
   close: () => void;

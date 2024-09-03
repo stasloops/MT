@@ -19,9 +19,11 @@ interface Props {
 }
 
 export const BottomMenu: FC<Props> = ({ items }) => {
-  const [activeTab, changeActiveTab] = useUnit([
+  const [activeTab, changeActiveTab, $swipeTransition, changeAnimationActiveTab] = useUnit([
     bottom_menu_model.$activeTab,
     bottom_menu_model.changeActiveTab,
+    bottom_menu_model.$swipeTransition,
+    bottom_menu_model.changeAnimationActiveTab
   ]);
   const [activeTabBgStyles, apiActiveTabBg] = useSpring(() => ({
     from: {
@@ -41,19 +43,23 @@ export const BottomMenu: FC<Props> = ({ items }) => {
   );
 
   const handleClick = (newActiveTab: number) => {
-    vibrateDevice(500);
-    changeActiveTab(newActiveTab);
-    apiActiveTabBg.start({
-      from: { x: `${50 * activeTab}%` },
-      to: { x: `${50 * newActiveTab}%` },
-      immediate: true,
-    });
-    apiTabs.start((i) => {
-      if (i !== newActiveTab) {
-        return { width: "100%" };
-      }
-      return { width: "200%" };
-    });
+    changeAnimationActiveTab(newActiveTab)
+
+    setTimeout(() => {
+      changeActiveTab(newActiveTab);
+      vibrateDevice(500);
+      apiActiveTabBg.start({
+        from: { x: `${50 * activeTab}%` },
+        to: { x: `${50 * newActiveTab}%` },
+        immediate: true,
+      });
+      apiTabs.start((i) => {
+        if (i !== newActiveTab) {
+          return { width: "100%" };
+        }
+        return { width: "200%" };
+      });
+    }, $swipeTransition)
   };
 
   useEffect(() => {

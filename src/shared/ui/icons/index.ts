@@ -1,3 +1,4 @@
+export { PrevIcon } from "./prev";
 export { PlusIcon } from "./plus";
 export { CoinIcon } from "./coin";
 export { MirrorIcon } from "./mirror";

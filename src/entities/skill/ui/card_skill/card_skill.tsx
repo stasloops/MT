@@ -2,11 +2,11 @@
 
 import React, { FC } from "react";
 import styles from "./card_skill.module.scss";
-import { ICardSkill } from "../types";
 import Image from "next/image";
-import { card_skins } from "../config";
-import fire from "../assets/fire.png";
+import fire from "../../assets/fire.png";
 import { Text } from "@/shared/ui/design_system";
+import { ICardSkill } from "../../types";
+import { card_skins } from "../../config";
 
 interface Props {
   item: ICardSkill;

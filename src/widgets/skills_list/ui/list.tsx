@@ -1,4 +1,5 @@
-import { ICardSkill } from "@/entities/card_skill";
+
+import { ICardSkill } from "@/entities/skill";
 import { useTransition, animated } from "@react-spring/web";
 import React, { FC, useEffect, useState } from "react";
 

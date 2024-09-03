@@ -1,0 +1,84 @@
+.wrapper {
+  position: relative;
+  text-align: center;
+  width: 100%;
+}
+
+.skills {
+  margin-top: 30px;
+  padding-bottom: calc(16px + var(--bottom-menu-width));
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 16px;
+
+  &_container {
+    width: 340px;
+    margin: 0 auto;
+  }
+}
+
+.add_skill {
+  position: fixed;
+  transition: 0.5s;
+  right: 16px;
+
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background-color: var(--purple1);
+  border: 1px solid var(--border);
+  border-width: 2px 2px 4px 2px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &_icon {
+    width: 24px;
+  }
+}
+
+.popup {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  &_item {
+    width: 144px;
+    position: relative;
+
+    &_count {
+      position: absolute;
+      top: -5px;
+      left: -5px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid #ada8b2;
+      border-width: 1px 1px 2px 1px;
+      background-color: #424c5a;
+    }
+
+    &_label {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      padding: 5px 9px;
+
+      border-radius: 4px;
+      border: 1px solid #ada8b2;
+      border-width: 1px 1px 2px 1px;
+      background-color: #424c5a;
+    }
+  }
+}
