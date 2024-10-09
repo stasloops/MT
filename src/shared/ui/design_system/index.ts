@@ -1,5 +1,4 @@
 export { bottom_menu_model } from "./bottom_menu";
-export { header_model } from "./header";
 
 export { Navigation } from "./navigation";
 export { Popup } from "./popup";

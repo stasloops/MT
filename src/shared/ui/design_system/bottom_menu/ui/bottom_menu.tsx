@@ -15,12 +15,6 @@ interface Props {
 }
 
 export const BottomMenu: FC<Props> = ({ items, activeTab, onChange }) => {
-  // const [activeTab, changeActiveTab, $swipeTransition, changeAnimationActiveTab] = useUnit([
-  //   bottom_menu_model.$activeTab,
-  //   bottom_menu_model.changeActiveTab,
-  //   bottom_menu_model.$swipeTransition,
-  //   bottom_menu_model.changeAnimationActiveTab
-  // ]);
   const activeTabIndex = items.findIndex((item) => item.key === activeTab);
 
   const [activeTabBgStyles, apiActiveTabBg] = useSpring(() => ({
