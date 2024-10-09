@@ -70,13 +70,13 @@ export const SkillsPopup = forwardRef<HTMLDivElement, Props>(
                   <Image unoptimized src={front || ""} alt="alt" />
 
                   <div className={styles.popup_item_count}>
-                    <Text variant="h3">
+                    <Text variant='title_m'>
                       {isActive ? quantityLeft - 1 : quantityLeft}
                     </Text>
                   </div>
 
                   <div className={styles.popup_item_label}>
-                    <Text variant="h3">{isActive ? "Выбрано" : "Выбрать"}</Text>
+                    <Text variant='title_m'>{isActive ? "Выбрано" : "Выбрать"}</Text>
                   </div>
                 </div>
               );

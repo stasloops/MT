@@ -2,6 +2,14 @@ import clsx from "clsx";
 import React, { FC } from "react";
 import styles from "./text.module.scss";
 import localFont from "next/font/local";
+import { Inter } from 'next/font/google'
+
+
+const inter = Inter({
+  variable: '--inter',
+  subsets: ['cyrillic', 'latin']
+
+})
 
 export const golos = localFont({
   src: "../../../fonts/Golos-Text_Medium.ttf",
@@ -26,51 +34,57 @@ interface TextType {
 }
 
 type TextVariants =
-  | "h1"
-  | "h2"
-  | "h3"
-  | "button_primary"
+  | "title_l"
+  | "title_m"
+  | "title_s"
+  | "caption_l"
+  | "caption_m"
+  | "body"
   | "description"
-  | "numeration";
 
 const TEXT_VARIANTS_CONFIG: Record<TextVariants, TextType> = {
-  h1: {
+  title_l: {
     fontFamily: supercell.className,
-    className: "h1",
+    className: "title_l",
     as: "h1",
     isShadow: true,
   },
-  h2: {
+  title_m: {
     fontFamily: supercell.className,
-    className: "h2",
+    className: "title_m",
     as: "h2",
     isShadow: true,
   },
-  h3: {
+  title_s: {
     fontFamily: supercell.className,
-    className: "h3",
+    className: "title_s",
     as: "h3",
     isShadow: true,
   },
-  button_primary: {
+  caption_l: {
     fontFamily: supercell.className,
-    className: "button_primary",
+    className: "caption_l",
     as: "span",
     isShadow: true,
   },
-
-  description: {
+  caption_m: {
     fontFamily: golos.className,
-    className: "description",
+    className: "caption_m",
+    as: "span",
+    isShadow: false,
+  },
+  body: {
+    fontFamily: inter.className,
+    className: "body",
     as: "p",
     isShadow: false,
   },
-  numeration: {
+  description: {
     fontFamily: supercell.className,
-    className: "numeration",
+    className: "description",
     as: "span",
     isShadow: true,
-  },
+  }
 };
 
 interface Props {
@@ -87,7 +101,7 @@ export const Text: FC<Props> = ({
   className,
 }) => {
   const currentTextVariant = TEXT_VARIANTS_CONFIG[variant];
-  const Component = currentTextVariant.as;
+  const Component = currentTextVariant?.as || 'p'
   return (
     <Component
       className={clsx(

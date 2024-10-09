@@ -4,6 +4,7 @@ import { CoinIcon, NewsIcon } from "@/shared/ui/icons";
 import { Text } from "../../text";
 
 export const Header = () => {
+
   return (
     <>
       <div className={styles.wrapper}>
@@ -11,7 +12,7 @@ export const Header = () => {
           <NewsIcon className={styles.news_icon} />
           <div className={styles.coins}>
             <CoinIcon className={styles.coins_icon} />
-            <Text className={styles.coins_count} variant="h3">
+            <Text className={styles.coins_count} variant="caption_m">
               30 990
             </Text>
           </div>

@@ -1,31 +1,56 @@
 import React, { useEffect, useState } from 'react'
 import styles from './skill.module.scss'
-import { Navigation } from '@/shared/ui/design_system'
-import { bottom_menu_model } from '@/shared/ui/design_system/bottom_menu'
+import { Text } from '@/shared/ui/design_system'
+import { Terms } from './terms/terms'
 import { useUnit } from 'effector-react'
+import { terms_model } from '../model'
+import clsx from 'clsx'
+
 
 export const Skill = () => {
-    const [animationActiveTab, changeTransition] = useUnit([bottom_menu_model.$animationActiveTab, bottom_menu_model.changeTransition])
-    const [isActive, setIsActive] = useState<boolean>(false)
+    const [mode, changeMode] = useUnit([terms_model.$mode, terms_model.changeMode])
+    const [showPopup, setShowPopup] = useState(false)
 
     useEffect(() => {
-        if (animationActiveTab === 1) {
-            changeTransition(300)
-            setTimeout(() => {
-                setIsActive(true)
-            }, 400)
+        if (mode === 'delete') {
+            setShowPopup(true)
         } else {
-            changeTransition(0)
-            setIsActive(false)
+            setShowPopup(false)
         }
-
-    }, [animationActiveTab])
+    }, [mode])
 
     return (
         <div className={styles.wrapper}>
-            <div className={styles.navigation} style={{ transform: isActive ? '' : 'translateY(-20vh)', transition: isActive ? '0.3s' : '0.2s' }}>
-                <Navigation prev={() => { }} home={() => { }} />
+            <div className={styles.section}>
+                <div className={styles.info}>
+                    <Text className={styles.title} variant="title_l">
+                        Название
+                    </Text>
+                    <Text className={styles.info_description} variant="body">
+                        Описание
+                    </Text>
+                </div>
             </div>
+
+            <div className={styles.section}>
+                <Terms />
+            </div>
+
+            <div className={styles.section}>
+                <Text variant="title_m">Активация</Text>
+            </div>
+
+            <div className={styles.section}>
+                <Text variant="title_m">Заметки</Text>
+            </div>
+
+            {showPopup && (
+                <div className={styles.popup}>
+                    <div className={styles.section}>
+                        <Terms />
+                    </div>
+                </div>
+            )}
         </div>
     )
 }

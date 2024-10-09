@@ -1,40 +1,38 @@
 "use client";
 
-import React, { ElementType, FC, useEffect } from "react";
+import React, { FC, useEffect } from "react";
 import styles from "./bottom_menu.module.scss";
 import clsx from "clsx";
-import { useUnit } from "effector-react";
-import { bottom_menu_model } from "../model";
 import { vibrateDevice } from "@/shared/lib/utils/vibrateDevice";
 import { animated, useSpring, useSprings } from "@react-spring/web";
 import { Text } from "../../text";
+import { ITool, ToolKey } from "@/shared/model/configuration";
 
 interface Props {
-  items: {
-    label: string;
-    icon: ElementType;
-    width: number;
-    height: number;
-  }[];
+  items: ITool[];
+  activeTab: string;
+  onChange: (tab: ToolKey) => void;
 }
 
-export const BottomMenu: FC<Props> = ({ items }) => {
-  const [activeTab, changeActiveTab, $swipeTransition, changeAnimationActiveTab] = useUnit([
-    bottom_menu_model.$activeTab,
-    bottom_menu_model.changeActiveTab,
-    bottom_menu_model.$swipeTransition,
-    bottom_menu_model.changeAnimationActiveTab
-  ]);
+export const BottomMenu: FC<Props> = ({ items, activeTab, onChange }) => {
+  // const [activeTab, changeActiveTab, $swipeTransition, changeAnimationActiveTab] = useUnit([
+  //   bottom_menu_model.$activeTab,
+  //   bottom_menu_model.changeActiveTab,
+  //   bottom_menu_model.$swipeTransition,
+  //   bottom_menu_model.changeAnimationActiveTab
+  // ]);
+  const activeTabIndex = items.findIndex(item => item.key === activeTab);
+
   const [activeTabBgStyles, apiActiveTabBg] = useSpring(() => ({
     from: {
-      x: `${50 * activeTab}%`,
+      x: `${50 * activeTabIndex}%`,
       width: "300%",
     },
   }));
   const [tabs, apiTabs] = useSprings(
     items.length,
     (i) => {
-      if (i === activeTab) {
+      if (i === activeTabIndex) {
         return { width: "200%" };
       }
       return { width: "100%" };
@@ -42,24 +40,26 @@ export const BottomMenu: FC<Props> = ({ items }) => {
     []
   );
 
-  const handleClick = (newActiveTab: number) => {
-    changeAnimationActiveTab(newActiveTab)
+  const handleClick = (newActiveTab: ToolKey) => {
+    // changeAnimationActiveTab(newActiveTab)
+
+    const newActiveTabIndex = items.findIndex(item => item.key === newActiveTab);
 
     setTimeout(() => {
-      changeActiveTab(newActiveTab);
+      onChange(newActiveTab);
       vibrateDevice(500);
       apiActiveTabBg.start({
-        from: { x: `${50 * activeTab}%` },
-        to: { x: `${50 * newActiveTab}%` },
+        from: { x: `${50 * activeTabIndex}%` },
+        to: { x: `${50 * newActiveTabIndex}%` },
         immediate: true,
       });
       apiTabs.start((i) => {
-        if (i !== newActiveTab) {
+        if (i !== newActiveTabIndex) {
           return { width: "100%" };
         }
         return { width: "200%" };
       });
-    }, $swipeTransition)
+    }, 0)
   };
 
   useEffect(() => {
@@ -78,8 +78,9 @@ export const BottomMenu: FC<Props> = ({ items }) => {
       ></animated.div>
 
       {tabs.map(({ width }, index) => {
-        const isActive = activeTab === index;
+        const isActive = activeTabIndex === index;
         const {
+          key,
           icon,
           label,
           width: iconWidth,
@@ -89,7 +90,7 @@ export const BottomMenu: FC<Props> = ({ items }) => {
 
         return (
           <animated.div
-            onClick={() => handleClick(index)}
+            onClick={() => handleClick(key)}
             onPointerDown={() => vibrateDevice(500)}
             className={clsx(styles.item)}
             style={{ width, transition: "0s" }}
@@ -105,7 +106,7 @@ export const BottomMenu: FC<Props> = ({ items }) => {
             />
             <div className={styles.item_label}>
               <Text
-                variant="h3"
+                variant='title_m'
                 className={clsx(styles.label, isActive && styles.label_active)}
               >
                 {label}

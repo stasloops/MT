@@ -38,21 +38,18 @@
     &_left {
       left: 0px;
       background: rgb(36, 35, 47);
-      background: linear-gradient(
-        0deg,
-        rgba(36, 35, 47, 1) 0%,
-        rgba(61, 58, 83, 1) 100%
-      );
+      background: linear-gradient(0deg,
+          rgba(36, 35, 47, 1) 0%,
+          rgba(61, 58, 83, 1) 100%);
     }
+
     &_right {
       z-index: 0;
       right: 0;
       background: rgb(132, 120, 149);
-      background: linear-gradient(
-        180deg,
-        rgba(132, 120, 149, 1) 0%,
-        rgba(61, 58, 83, 1) 100%
-      );
+      background: linear-gradient(180deg,
+          rgba(132, 120, 149, 1) 0%,
+          rgba(61, 58, 83, 1) 100%);
     }
   }
 }
@@ -66,7 +63,7 @@
   height: var(--menu-height);
 
   border-top: 4px solid var(--border_selected);
-  background: var(--gradient_selected);
+  background: #774BC3;
 }
 
 .icon {

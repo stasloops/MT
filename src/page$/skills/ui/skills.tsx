@@ -1,11 +1,12 @@
+import { skill_page_model } from '@/entities/skill';
 import { Skill } from '@/widgets/skill';
 import { SkillsList } from '@/widgets/skills_list';
-import { useState } from 'react';
+import { useUnit } from 'effector-react';
 
 export const Skills = () => {
-  const [page, setPage] = useState<'list' | 'skill'>('skill')
+  const [page] = useUnit([skill_page_model.$page])
 
-  if (page === 'list') {
+  if (page === 'skill_list') {
     return <SkillsList />
   }
 

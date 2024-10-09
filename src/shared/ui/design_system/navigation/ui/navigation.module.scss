@@ -1,5 +1,9 @@
 .navigation {
+    position: relative;
+    z-index: 101;
+
     width: 100%;
+    padding-top: 16px;
 
     display: flex;
     justify-content: space-between;
@@ -12,7 +16,7 @@
     width: 67px;
     height: 38px;
     cursor: pointer;
-    
+
     &_left {
         border-radius: 0 4px 4px 0;
         border-bottom: 2px solid #2A2B32;

@@ -1,9 +1,60 @@
 .wrapper {
     position: relative;
     width: 100%;
+    padding: 16px;
+    padding-bottom: 120px;
+}
+.popup {
+    position: absolute;
+    z-index: 200;
+    top: 50%;  // Смещение к центру по вертикали
+    left: 50%;  // Смещение к центру по горизонтали
+    transform: translate(-50%, -50%);  // Центрирование
+    animation: moveToCenter 0.5s ease-out;
+    width: 100%;  // Настроить по аналогии с Terms
+    height: 100%;  // Настроить по аналогии с Terms
+    background: white;  // Сделать popup визуально похожим на блок terms
+    border: 1px solid #ccc;  // Настроить так, чтобы соответствовало стилю terms
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+    
 }
 
-.navigation {
-    transition: 0.3s;
+@keyframes moveToCenter {
+    from {
+        top: 100%;  // Начальная позиция внизу экрана
+        left: 50%;
+        transform: translate(-50%, 0); 
+    }
+    to {
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
 
+.section {
+    position: relative;
+    z-index: 1;
+
+    background-color: #363444;
+
+    border: 1px solid #514E65;
+    border-width: 2px 2px 4px 2px;
+    border-radius: 8px;
+
+    margin-top: 12px;
+    padding: 12px;
+}
+
+
+.sectionActive {
+    z-index: 200;
+}
+
+.info {
+    min-height: 140px;
+
+    &_description {
+        margin-top: 8px;
+    }
 }

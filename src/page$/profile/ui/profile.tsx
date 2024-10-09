@@ -15,7 +15,7 @@ export const Profile = () => {
 
   return (
     <div>
-      <Text textAlign="center" variant="h1">
+      <Text textAlign="center" variant='title_l'>
         Profile
       </Text>
       <div className="mt-4">

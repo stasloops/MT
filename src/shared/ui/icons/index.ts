@@ -1,3 +1,5 @@
+export type { IconWrapperProps } from './icon';
+export { CheckIcon } from './check';
 export { PrevIcon } from "./prev";
 export { PlusIcon } from "./plus";
 export { CoinIcon } from "./coin";

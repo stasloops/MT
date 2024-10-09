@@ -25,13 +25,13 @@ export const Popup = forwardRef<HTMLDivElement, Props>(
             <div ref={ref} className={styles.centering}>
               <div className={styles.popup}>
                 <div className={styles.head}>
-                  <Text variant="h2">{title}</Text>
+                  <Text variant='title_m'>{title}</Text>
                 </div>
                 <div className={styles.content}>{children}</div>
               </div>
               {button ? (
                 <Button className={styles.button} {...button}>
-                  <Text variant="button_primary">{button.text}</Text>
+                  <Text variant="caption_l">{button.text}</Text>
                 </Button>
               ) : null}
             </div>

@@ -1,5 +1,5 @@
-import React, { useEffect, useLayoutEffect, useState } from "react";
-import { BottomMenu, Header, Popup } from "@/shared/ui/design_system";
+import React, { useLayoutEffect } from "react";
+import { BottomMenu, Popup } from "@/shared/ui/design_system";
 import { BookIcon, ChestIcon, MirrorIcon, WheelIcon } from "@/shared/ui/icons";
 import styles from "./page.module.scss";
 import { Route, Router } from "@/shared/lib/router";
@@ -13,8 +13,11 @@ import { useUnit } from "effector-react";
 import { LoginButton } from "@telegram-auth/react";
 import axios from "axios";
 import Loading from "./loading";
+import { TopBar } from "@/widgets/top_bar";
+import { configuration_model } from "@/shared/model/configuration";
 
 const LazyLayout = () => {
+  const [currentTools, activeTool, changeActiveTool] = useUnit([configuration_model.$currentTools, configuration_model.$activeTool, configuration_model.changeActiveTool])
   const [user, isLoading, fetchUser] = useUnit([
     user_model.$user,
     user_model.$isLoading,
@@ -31,6 +34,8 @@ const LazyLayout = () => {
 
   if (!user && !isLoading) {
     const auth = async (data: any) => {
+      console.log(data);
+      
       await axios.post("/api/auth", data);
       await fetchUser();
     };
@@ -58,7 +63,7 @@ const LazyLayout = () => {
 
   return (
     <div className={styles.wrapper}>
-      <Header />
+      <TopBar />
 
       <Router>
         <div className={styles.background}></div>
@@ -71,13 +76,9 @@ const LazyLayout = () => {
       </Router>
 
       <BottomMenu
-        items={[
-          { label: "Профиль", icon: MirrorIcon, width: 36, height: 51 },
-          { label: "Навыки", icon: MirrorIcon, width: 36, height: 51 },
-          { label: "Предметы", icon: ChestIcon, width: 47, height: 46 },
-          { label: "Задания", icon: BookIcon, width: 44, height: 55 },
-          { label: "Настройки", icon: WheelIcon, width: 44, height: 45 },
-        ]}
+        items={currentTools}
+        activeTab={activeTool}
+        onChange={changeActiveTool}
       />
     </div>
   );

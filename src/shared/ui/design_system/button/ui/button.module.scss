@@ -1,22 +1,50 @@
 .wrapper {
   width: 207px;
-
-  border: 1px solid var(--primary_button_border);
-  background-color: var(--primary_button_border);
-  border-width: 2px 2px 4px 2px;
-
+  border-width: 2px 2px 4px 2px !important;
   border-radius: 6px;
+
+  &--variant {
+    &-primary {
+      border: 1px solid #340073;
+      background-color: #340073;
+    }
+
+    &-default {
+      border: 1px solid #241E2D;
+      background-color: #340073;
+    }
+
+    &-save {
+      border: 1px solid #0D6316;
+      background-color: #0D6316;
+    }
+  }
 }
 
 .button {
-  border-top: 2px solid #ffffff3c;
-  border-bottom: 4px solid #5a0eb6;
-  border-radius: 6px;
-
-  background-color: var(--primary_button);
+  border-radius: 6px 6px 6px 6px;
   padding: 12px 46px;
-
   text-align: center;
+
+  &--variant {
+    &-primary {
+      border-top: 2px solid #ffffff3c;
+      border-bottom: 4px solid #5a0eb6;
+      background-color: var(--primary_button);
+    }
+
+    &-default {
+      border-top: 2px solid #FFFFFF3B;
+      border-bottom: 4px solid #473B5B;
+      background-color: #685B77;
+    }
+
+    &-save {
+      border-top: 2px solid #FFFFFF3B;
+      border-bottom: 4px solid #289A00;
+      background-color: #26ED2E;
+    }
+  }
 }
 
 .disabled {

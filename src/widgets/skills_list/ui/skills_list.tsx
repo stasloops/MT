@@ -9,60 +9,68 @@ import { PlusIcon } from "@/shared/ui/icons";
 import { useIsClient, usePopup } from "@/shared/lib";
 import { SkillsPopup } from "./popup";
 import { List } from "./list";
-import { CardSkill, ICardSkill, skills_model } from "@/entities/skill";
+import {
+  CardSkill,
+  ICardSkill,
+  skill_page_model,
+  skills_model,
+} from "@/entities/skill";
+import { configuration_model } from "@/shared/model/configuration";
 
 export const SkillsList = () => {
-    const isClient = useIsClient();
-    const { ref, isOpen, setIsOpen } = usePopup();
+  const isClient = useIsClient();
+  const { ref, isOpen, setIsOpen } = usePopup();
+  const [routePage] = useUnit([skill_page_model.routePage]);
+  const [skills, fetchSkills] = useUnit([
+    skills_model.$skills,
+    skills_model.fetchSkillsFx,
+  ]);
+  const [activeTab] = useUnit([configuration_model.$activeTool]);
 
-    const [skills, fetchSkills, removeSkill] = useUnit([
-        skills_model.$skills,
-        skills_model.fetchSkillsFx,
-        skills_model.removeSkill,
-    ]);
-    const [activeTab] = useUnit([bottom_menu_model.$activeTab]);
+  const closePopup = () => {
+    setIsOpen(false);
+  };
 
-    const closePopup = () => {
-        setIsOpen(false);
-    };
+  const openPopup = () => {
+    setIsOpen(true);
+  };
 
-    const openPopup = () => {
-        setIsOpen(true);
-    };
+  useEffect(() => {
+    fetchSkills();
+  }, []);
+  return (
+    <div className={styles.wrapper}>
+      <Text textAlign="center" variant="title_l">
+        Навыки
+      </Text>
 
-    useEffect(() => {
-        fetchSkills();
-    }, []);
-    return (
-        <div className={styles.wrapper}>
-            <Text textAlign="center" variant="h1">
-                Навыки
-            </Text>
+      <List
+        itemsData={skills}
+        listItem={(item: ICardSkill) => (
+          <CardSkill
+            onClick={() => routePage({ path: "skill", skill_id: item.id })}
+            item={item}
+          />
+        )}
+        ITEM_WIDTH={162}
+        ITEM_HEIGHT={214}
+        GAP={15}
+      />
 
-            <List
-                itemsData={skills}
-                listItem={(item: ICardSkill) => (
-                    <CardSkill onClick={() => removeSkill(item.id)} item={item} />
-                )}
-                ITEM_WIDTH={162}
-                ITEM_HEIGHT={214}
-                GAP={15}
-            />
+      {isClient
+        ? createPortal(
+            <div
+              style={{ bottom: activeTab === "skills" ? "110px" : "0" }}
+              onClick={openPopup}
+              className={styles.add_skill}
+            >
+              <PlusIcon className={styles.add_skill_icon} />
+            </div>,
+            document?.body
+          )
+        : null}
 
-            {isClient
-                ? createPortal(
-                    <div
-                        style={{ bottom: activeTab === 1 ? "110px" : "0" }}
-                        onClick={openPopup}
-                        className={styles.add_skill}
-                    >
-                        <PlusIcon className={styles.add_skill_icon} />
-                    </div>,
-                    document?.body
-                )
-                : null}
-
-            {isOpen && <SkillsPopup ref={ref} close={closePopup} isOpen={isOpen} />}
-        </div>
-    )
-}
+      {isOpen && <SkillsPopup ref={ref} close={closePopup} isOpen={isOpen} />}
+    </div>
+  );
+};
