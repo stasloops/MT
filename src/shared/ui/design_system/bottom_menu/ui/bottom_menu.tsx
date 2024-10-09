@@ -21,7 +21,7 @@ export const BottomMenu: FC<Props> = ({ items, activeTab, onChange }) => {
   //   bottom_menu_model.$swipeTransition,
   //   bottom_menu_model.changeAnimationActiveTab
   // ]);
-  const activeTabIndex = items.findIndex(item => item.key === activeTab);
+  const activeTabIndex = items.findIndex((item) => item.key === activeTab);
 
   const [activeTabBgStyles, apiActiveTabBg] = useSpring(() => ({
     from: {
@@ -43,7 +43,9 @@ export const BottomMenu: FC<Props> = ({ items, activeTab, onChange }) => {
   const handleClick = (newActiveTab: ToolKey) => {
     // changeAnimationActiveTab(newActiveTab)
 
-    const newActiveTabIndex = items.findIndex(item => item.key === newActiveTab);
+    const newActiveTabIndex = items.findIndex(
+      (item) => item.key === newActiveTab
+    );
 
     setTimeout(() => {
       onChange(newActiveTab);
@@ -59,7 +61,7 @@ export const BottomMenu: FC<Props> = ({ items, activeTab, onChange }) => {
         }
         return { width: "200%" };
       });
-    }, 0)
+    }, 0);
   };
 
   useEffect(() => {
@@ -101,12 +103,12 @@ export const BottomMenu: FC<Props> = ({ items, activeTab, onChange }) => {
             ></div>
             <Icon
               className={clsx(styles.icon, isActive && styles.icon_active)}
-              width={iconWidth}
-              height={iconHeight}
+              width={String(iconWidth) + "px"}
+              height={String(iconHeight) + "px"}
             />
             <div className={styles.item_label}>
               <Text
-                variant='title_m'
+                variant="title_m"
                 className={clsx(styles.label, isActive && styles.label_active)}
               >
                 {label}
