@@ -34,7 +34,7 @@ export const CardSkill: FC<Props> = ({ item, onClick }) => {
             <Text
               className={styles.fire_count}
               textAlign="center"
-              variant="title_l"
+              variant="title_s"
             >
               {item.streak}
             </Text>
@@ -43,7 +43,7 @@ export const CardSkill: FC<Props> = ({ item, onClick }) => {
       ) : null}
 
       <div className={styles.container}>
-        <Text variant="body">{item.title}</Text>
+        <Text variant="title_s">{item.title}</Text>
         <Text className={styles.description} variant="description">
           {item.description}
         </Text>

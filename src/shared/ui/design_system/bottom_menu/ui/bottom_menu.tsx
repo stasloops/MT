@@ -35,8 +35,6 @@ export const BottomMenu: FC<Props> = ({ items, activeTab, onChange }) => {
   );
 
   const handleClick = (newActiveTab: ToolKey) => {
-    // changeAnimationActiveTab(newActiveTab)
-
     const newActiveTabIndex = items.findIndex(
       (item) => item.key === newActiveTab
     );

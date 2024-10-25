@@ -14,14 +14,14 @@
 
 .item {
   position: relative;
-  background: var(--gradient_default);
+  background: #3F3D45;
   padding-top: 5px;
   padding-bottom: 27px;
   display: flex;
   flex-direction: column;
   align-items: center;
   transition: 0.2s;
-  border-top: 4px solid var(--border);
+  border-top: 4px solid #6B6A70;
 
   &_label {
     position: absolute;
@@ -62,7 +62,7 @@
   left: 0;
   height: var(--menu-height);
 
-  border-top: 4px solid var(--border_selected);
+  border-top: 4px solid #FFFFFF3B;
   background: #774BC3;
 }
 

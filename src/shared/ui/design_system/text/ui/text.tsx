@@ -102,6 +102,7 @@ export const Text: FC<Props> = ({
 }) => {
   const currentTextVariant = TEXT_VARIANTS_CONFIG[variant];
   const Component = currentTextVariant?.as || 'p'
+ 
   return (
     <Component
       className={clsx(
@@ -110,6 +111,7 @@ export const Text: FC<Props> = ({
         styles[`text--variant-${currentTextVariant.className}`],
         currentTextVariant.fontFamily,
         currentTextVariant.isShadow && styles.text_shadow
+        
       )}
       style={{ textAlign }}
     >

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import styles from './skill.module.scss'
 import { Text } from '@/shared/ui/design_system'
-import { Terms } from './terms/terms'
 import { useUnit } from 'effector-react'
 import { terms_model } from '../model'
-import clsx from 'clsx'
+import { skill_page_model } from '@/entities/skill'
 
 
 export const Skill = () => {
+    const [skill_id] = useUnit([skill_page_model.$skillId])
     const [mode, changeMode] = useUnit([terms_model.$mode, terms_model.changeMode])
     const [showPopup, setShowPopup] = useState(false)
 
@@ -32,7 +32,7 @@ export const Skill = () => {
                 </div>
             </div>
 
-            <div className={styles.section}>
+            {/* <div className={styles.section}>
                 <Terms />
             </div>
 
@@ -50,7 +50,7 @@ export const Skill = () => {
                         <Terms />
                     </div>
                 </div>
-            )}
+            )} */}
         </div>
     )
 }

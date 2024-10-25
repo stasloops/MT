@@ -1,6 +1,5 @@
-import React, { useLayoutEffect } from "react";
+import React, { useEffect, useLayoutEffect } from "react";
 import { BottomMenu, Popup } from "@/shared/ui/design_system";
-import { BookIcon, ChestIcon, MirrorIcon, WheelIcon } from "@/shared/ui/icons";
 import styles from "./page.module.scss";
 import { Route, Router } from "@/shared/lib/router";
 import { Profile } from "@/page$/profile";
@@ -17,12 +16,25 @@ import { TopBar } from "@/widgets/top_bar";
 import { configuration_model } from "@/shared/model/configuration";
 
 const LazyLayout = () => {
-  const [currentTools, activeTool, changeActiveTool] = useUnit([configuration_model.$currentTools, configuration_model.$activeTool, configuration_model.changeActiveTool])
+  const [currentTools, activeTool, changeActiveTool] = useUnit([
+    configuration_model.$currentTools,
+    configuration_model.$activeTool,
+    configuration_model.changeActiveTool,
+  ]);
   const [user, isLoading, fetchUser] = useUnit([
     user_model.$user,
     user_model.$isLoading,
     user_model.fetchUserFx,
   ]);
+
+  useEffect(() => {
+    let x = 5
+    let y = 7
+    x = y
+
+    console.log(x, y);
+  
+  }, []);
 
   useLayoutEffect(() => {
     fetchUser();
@@ -35,7 +47,7 @@ const LazyLayout = () => {
   if (!user && !isLoading) {
     const auth = async (data: any) => {
       console.log(data);
-      
+
       await axios.post("/api/auth", data);
       await fetchUser();
     };

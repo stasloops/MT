@@ -48,6 +48,7 @@ export const SkillsPopup = forwardRef<HTMLDivElement, Props>(
           text: "Подтвердить",
           onClick: createSkill,
           isDisabled: activeCardId ? false : true,
+          variant: 'primary'
         }}
         ref={ref}
       >
@@ -55,28 +56,28 @@ export const SkillsPopup = forwardRef<HTMLDivElement, Props>(
           {skillCardSkins
             ?.sort((a, b) => b.quantityLeft - a.quantityLeft)
             .map(({ id, quantityLeft, skinId }) => {
-              const front = card_skins.find((s) => s.id === skinId)?.front;
-              const isActive = activeCardId === id;
+              const bg_image = card_skins.find((s) => s.id === skinId)?.back;
+              const is_active = activeCardId === id;
               return (
                 <div
                   key={id}
                   className={styles.popup_item}
                   style={{
-                    opacity: isActive || !quantityLeft ? "0.6" : "",
+                    opacity: is_active || !quantityLeft ? "0.6" : "",
                     transition: "0.1s",
                   }}
                   onClick={() => quantityLeft >= 1 && handleActiveCard(id)}
                 >
-                  <Image unoptimized src={front || ""} alt="alt" />
+                  <Image unoptimized src={bg_image || ""} alt="alt" />
 
                   <div className={styles.popup_item_count}>
                     <Text variant='title_m'>
-                      {isActive ? quantityLeft - 1 : quantityLeft}
+                      {is_active ? quantityLeft - 1 : quantityLeft}
                     </Text>
                   </div>
 
                   <div className={styles.popup_item_label}>
-                    <Text variant='title_m'>{isActive ? "Выбрано" : "Выбрать"}</Text>
+                    <Text variant='title_m'>{is_active ? "Выбрано" : "Выбрать"}</Text>
                   </div>
                 </div>
               );
